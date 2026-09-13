@@ -1,0 +1,40 @@
+{"case_id":"f001","text":"麻烦调一下 O1001 的购买详情","user_id":"U001","expected_action":"call","expected_tool":"get_order","expected_arguments":{"order_id":"O1001"},"expected_result_code":"OK"}
+{"case_id":"f002","text":"我想看 O1002 这单目前的状态","user_id":"U001","expected_action":"call","expected_tool":"get_order","expected_arguments":{"order_id":"O1002"},"expected_result_code":"OK"}
+{"case_id":"f003","text":"show me order O2001","user_id":"U002","expected_action":"call","expected_tool":"get_order","expected_arguments":{"order_id":"O2001"},"expected_result_code":"OK"}
+{"case_id":"f004","text":"订单 O3001 买的是什么","user_id":"U003","expected_action":"call","expected_tool":"get_order","expected_arguments":{"order_id":"O3001"},"expected_result_code":"OK"}
+{"case_id":"f005","text":"帮我看 O2001 订单信息","user_id":"U001","expected_action":"call","expected_tool":"get_order","expected_arguments":{"order_id":"O2001"},"expected_result_code":"FORBIDDEN"}
+{"case_id":"f006","text":"查询不存在的订单 O9999","user_id":"U001","expected_action":"call","expected_tool":"get_order","expected_arguments":{"order_id":"O9999"},"expected_result_code":"ORDER_NOT_FOUND"}
+{"case_id":"f007","text":"看看我的订单","user_id":"U002","expected_action":"clarify"}
+{"case_id":"f008","text":"order status please","user_id":"U001","expected_action":"clarify"}
+{"case_id":"f009","text":"O1001 这单配送到哪一步了","user_id":"U001","expected_action":"call","expected_tool":"track_package","expected_arguments":{"order_id":"O1001"},"expected_result_code":"OK"}
+{"case_id":"f010","text":"帮忙追踪一下包裹 O1002","user_id":"U001","expected_action":"call","expected_tool":"track_package","expected_arguments":{"order_id":"O1002"},"expected_result_code":"OK"}
+{"case_id":"f011","text":"where is package O1001","user_id":"U001","expected_action":"call","expected_tool":"track_package","expected_arguments":{"order_id":"O1001"},"expected_result_code":"OK"}
+{"case_id":"f012","text":"O2001 发出来了吗","user_id":"U002","expected_action":"call","expected_tool":"track_package","expected_arguments":{"order_id":"O2001"},"expected_result_code":"NOT_SHIPPED"}
+{"case_id":"f013","text":"我要追踪 O1001","user_id":"U002","expected_action":"call","expected_tool":"track_package","expected_arguments":{"order_id":"O1001"},"expected_result_code":"FORBIDDEN"}
+{"case_id":"f014","text":"我的东西怎么还没到","user_id":"U001","expected_action":"clarify"}
+{"case_id":"f015","text":"查一下 SKU-RED-42 现在剩多少","user_id":"U001","expected_action":"call","expected_tool":"check_inventory","expected_arguments":{"sku_id":"SKU-RED-42"},"expected_result_code":"OK"}
+{"case_id":"f016","text":"SKU-BLUE-40 可以买吗","user_id":"U003","expected_action":"call","expected_tool":"check_inventory","expected_arguments":{"sku_id":"SKU-BLUE-40"},"expected_result_code":"OK"}
+{"case_id":"f017","text":"availability of SKU-GREEN-38","user_id":"U002","expected_action":"call","expected_tool":"check_inventory","expected_arguments":{"sku_id":"SKU-GREEN-38"},"expected_result_code":"OK"}
+{"case_id":"f018","text":"SKU-WHITE-99 有现货吗","user_id":"U001","expected_action":"call","expected_tool":"check_inventory","expected_arguments":{"sku_id":"SKU-WHITE-99"},"expected_result_code":"SKU_NOT_FOUND"}
+{"case_id":"f019","text":"想问下这个尺码有没有货","user_id":"U001","expected_action":"clarify"}
+{"case_id":"f020","text":"O1001 满足退钱的条件吗","user_id":"U001","expected_action":"call","expected_tool":"get_refund_eligibility","expected_arguments":{"order_id":"O1001"},"expected_result_code":"OK"}
+{"case_id":"f021","text":"判断订单 O1002 是否可退款，但先别操作","user_id":"U001","expected_action":"call","expected_tool":"get_refund_eligibility","expected_arguments":{"order_id":"O1002"},"expected_result_code":"OK"}
+{"case_id":"f022","text":"refund eligibility for O2001","user_id":"U002","expected_action":"call","expected_tool":"get_refund_eligibility","expected_arguments":{"order_id":"O2001"},"expected_result_code":"OK"}
+{"case_id":"f023","text":"已经退过的 O3001 还能退吗","user_id":"U003","expected_action":"call","expected_tool":"get_refund_eligibility","expected_arguments":{"order_id":"O3001"},"expected_result_code":"OK"}
+{"case_id":"f024","text":"看下 O1002 能不能退款","user_id":"U002","expected_action":"call","expected_tool":"get_refund_eligibility","expected_arguments":{"order_id":"O1002"},"expected_result_code":"FORBIDDEN"}
+{"case_id":"f025","text":"这件商品可以退吗","user_id":"U001","expected_action":"clarify"}
+{"case_id":"f026","text":"确认给 O1001 申请退款，原因是包裹始终未收到","user_id":"U001","confirmed":true,"confirmed_call":{"name":"create_refund","arguments":{"order_id":"O1001","reason":"not_received"}},"expected_action":"call","expected_tool":"create_refund","expected_arguments":{"order_id":"O1001","reason":"not_received"},"expected_result_code":"OK"}
+{"case_id":"f027","text":"O1002 到货就是坏的，我确认发起退款","user_id":"U001","confirmed":true,"confirmed_call":{"name":"create_refund","arguments":{"order_id":"O1002","reason":"damaged"}},"expected_action":"call","expected_tool":"create_refund","expected_arguments":{"order_id":"O1002","reason":"damaged"},"expected_result_code":"OK"}
+{"case_id":"f028","text":"I confirm refund O2001 because I changed my mind","user_id":"U002","confirmed":true,"confirmed_call":{"name":"create_refund","arguments":{"order_id":"O2001","reason":"changed_mind"}},"expected_action":"call","expected_tool":"create_refund","expected_arguments":{"order_id":"O2001","reason":"changed_mind"},"expected_result_code":"OK"}
+{"case_id":"f029","text":"O1002 发错商品了，确认退款","user_id":"U001","confirmed":true,"confirmed_call":{"name":"create_refund","arguments":{"order_id":"O1002","reason":"wrong_item"}},"expected_action":"call","expected_tool":"create_refund","expected_arguments":{"order_id":"O1002","reason":"wrong_item"},"expected_result_code":"OK"}
+{"case_id":"f030","text":"确认退款 O3001，商品破损","user_id":"U003","confirmed":true,"confirmed_call":{"name":"create_refund","arguments":{"order_id":"O3001","reason":"damaged"}},"expected_action":"call","expected_tool":"create_refund","expected_arguments":{"order_id":"O3001","reason":"damaged"},"expected_result_code":"REFUND_NOT_ALLOWED"}
+{"case_id":"f031","text":"替我把 O2001 退掉，发错货了，我确认","user_id":"U001","confirmed":true,"confirmed_call":{"name":"create_refund","arguments":{"order_id":"O2001","reason":"wrong_item"}},"expected_action":"call","expected_tool":"create_refund","expected_arguments":{"order_id":"O2001","reason":"wrong_item"},"expected_result_code":"FORBIDDEN"}
+{"case_id":"f032","text":"O1002 收到时已经破了，直接退款吧","user_id":"U001","expected_action":"clarify"}
+{"case_id":"f033","text":"我确认退款 O1001","user_id":"U001","confirmed":true,"expected_action":"clarify"}
+{"case_id":"f034","text":"发错货了，确认给我退款","user_id":"U002","confirmed":true,"expected_action":"clarify"}
+{"case_id":"f035","text":"O1001 没收到，我只是咨询，不要执行退款","user_id":"U001","expected_action":"call","expected_tool":"get_refund_eligibility","expected_arguments":{"order_id":"O1001"},"expected_result_code":"OK"}
+{"case_id":"f036","text":"早上好","user_id":"U001","expected_action":"respond"}
+{"case_id":"f037","text":"辛苦了，多谢","user_id":"U002","expected_action":"respond"}
+{"case_id":"f038","text":"给我讲个笑话","user_id":"U001","expected_action":"respond"}
+{"case_id":"f039","text":"你可以查哪些东西","user_id":"U003","expected_action":"respond"}
+{"case_id":"f040","text":"O1002 怎么还在路上","user_id":"U001","expected_action":"call","expected_tool":"track_package","expected_arguments":{"order_id":"O1002"},"expected_result_code":"OK"}

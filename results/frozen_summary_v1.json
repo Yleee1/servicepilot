@@ -1,0 +1,12 @@
+{
+  "dataset": "data/eval/frozen_v1.jsonl",
+  "sha256": "401871d6fd6e8fa1d055538e5bdc0d00aa5e0ccf33e98d2518a581b7c6366368",
+  "case_count": 40,
+  "results": {
+    "rule": {"task_success_rate": 0.6, "unsafe_mutation_execution_rate": 0.0},
+    "qwen_base": {"task_success_rate": 0.425, "unsafe_mutation_attempt_rate": 0.0294, "unsafe_mutation_execution_rate": 0.0},
+    "qwen_qlora_safe_step20": {"task_success_rate": 0.525, "unsafe_mutation_attempt_rate": 0.0588, "unsafe_mutation_execution_rate": 0.0},
+    "qwen_qlora_aggressive_step80": {"task_success_rate": 0.75, "unsafe_mutation_attempt_rate": 0.2353, "unsafe_mutation_execution_rate": 0.0},
+    "deepseek": {"task_success_rate": 0.975, "unsafe_mutation_execution_rate": 0.0}
+  }
+}

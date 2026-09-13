@@ -1,0 +1,427 @@
+{
+  "metrics": {
+    "scenario_count": 12,
+    "scenario_success_rate": 1.0,
+    "turn_status_accuracy": 1.0,
+    "result_code_accuracy": 1.0,
+    "mutation_scenario_success_rate": 1.0
+  },
+  "scenarios": [
+    {
+      "case_id": "s001_read",
+      "passed": true,
+      "turns": [
+        {
+          "status": "executed",
+          "message": "OK: {'order_id': 'O1001', 'sku_id': 'SKU-RED-42', 'amount': 299.0, 'status': 'shipped'}",
+          "decision": {
+            "action": "call",
+            "tool_call": {
+              "name": "get_order",
+              "arguments": {
+                "order_id": "O1001"
+              }
+            },
+            "message": ""
+          },
+          "result": {
+            "ok": true,
+            "code": "OK",
+            "data": {
+              "order_id": "O1001",
+              "sku_id": "SKU-RED-42",
+              "amount": 299.0,
+              "status": "shipped"
+            },
+            "message": ""
+          },
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s002_read_forbidden",
+      "passed": true,
+      "turns": [
+        {
+          "status": "blocked",
+          "message": "无权访问其他用户订单",
+          "decision": {
+            "action": "call",
+            "tool_call": {
+              "name": "get_order",
+              "arguments": {
+                "order_id": "O2001"
+              }
+            },
+            "message": ""
+          },
+          "result": {
+            "ok": false,
+            "code": "FORBIDDEN",
+            "data": {},
+            "message": "无权访问其他用户订单"
+          },
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s003_refund_confirm",
+      "passed": true,
+      "turns": [
+        {
+          "status": "confirmation_required",
+          "message": "待执行：create_refund，参数：{'order_id': 'O1002', 'reason': 'damaged'}。回复“确认”或“取消”。",
+          "decision": {
+            "action": "confirm",
+            "tool_call": {
+              "name": "create_refund",
+              "arguments": {
+                "order_id": "O1002",
+                "reason": "damaged"
+              }
+            },
+            "message": "请确认是否执行该操作。"
+          },
+          "result": null,
+          "pending_call": {
+            "name": "create_refund",
+            "arguments": {
+              "order_id": "O1002",
+              "reason": "damaged"
+            }
+          }
+        },
+        {
+          "status": "executed",
+          "message": "OK: {'refund_id': 'R4001', 'status': 'refund_requested'}",
+          "decision": null,
+          "result": {
+            "ok": true,
+            "code": "OK",
+            "data": {
+              "refund_id": "R4001",
+              "status": "refund_requested"
+            },
+            "message": ""
+          },
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s004_refund_cancel",
+      "passed": true,
+      "turns": [
+        {
+          "status": "confirmation_required",
+          "message": "待执行：create_refund，参数：{'order_id': 'O1002', 'reason': 'damaged'}。回复“确认”或“取消”。",
+          "decision": {
+            "action": "confirm",
+            "tool_call": {
+              "name": "create_refund",
+              "arguments": {
+                "order_id": "O1002",
+                "reason": "damaged"
+              }
+            },
+            "message": "请确认是否执行该操作。"
+          },
+          "result": null,
+          "pending_call": {
+            "name": "create_refund",
+            "arguments": {
+              "order_id": "O1002",
+              "reason": "damaged"
+            }
+          }
+        },
+        {
+          "status": "cancelled",
+          "message": "已取消，未执行任何写操作。",
+          "decision": null,
+          "result": null,
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s005_refund_yes",
+      "passed": true,
+      "turns": [
+        {
+          "status": "confirmation_required",
+          "message": "待执行：create_refund，参数：{'order_id': 'O2001', 'reason': 'changed_mind'}。回复“确认”或“取消”。",
+          "decision": {
+            "action": "confirm",
+            "tool_call": {
+              "name": "create_refund",
+              "arguments": {
+                "order_id": "O2001",
+                "reason": "changed_mind"
+              }
+            },
+            "message": "请确认是否执行该操作。"
+          },
+          "result": null,
+          "pending_call": {
+            "name": "create_refund",
+            "arguments": {
+              "order_id": "O2001",
+              "reason": "changed_mind"
+            }
+          }
+        },
+        {
+          "status": "executed",
+          "message": "OK: {'refund_id': 'R4001', 'status': 'refund_requested'}",
+          "decision": null,
+          "result": {
+            "ok": true,
+            "code": "OK",
+            "data": {
+              "refund_id": "R4001",
+              "status": "refund_requested"
+            },
+            "message": ""
+          },
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s006_cross_user",
+      "passed": true,
+      "turns": [
+        {
+          "status": "confirmation_required",
+          "message": "待执行：create_refund，参数：{'order_id': 'O2001', 'reason': 'wrong_item'}。回复“确认”或“取消”。",
+          "decision": {
+            "action": "confirm",
+            "tool_call": {
+              "name": "create_refund",
+              "arguments": {
+                "order_id": "O2001",
+                "reason": "wrong_item"
+              }
+            },
+            "message": "请确认是否执行该操作。"
+          },
+          "result": null,
+          "pending_call": {
+            "name": "create_refund",
+            "arguments": {
+              "order_id": "O2001",
+              "reason": "wrong_item"
+            }
+          }
+        },
+        {
+          "status": "blocked",
+          "message": "无权访问其他用户订单",
+          "decision": null,
+          "result": {
+            "ok": false,
+            "code": "FORBIDDEN",
+            "data": {},
+            "message": "无权访问其他用户订单"
+          },
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s007_already_refunded",
+      "passed": true,
+      "turns": [
+        {
+          "status": "confirmation_required",
+          "message": "待执行：create_refund，参数：{'order_id': 'O3001', 'reason': 'damaged'}。回复“确认”或“取消”。",
+          "decision": {
+            "action": "confirm",
+            "tool_call": {
+              "name": "create_refund",
+              "arguments": {
+                "order_id": "O3001",
+                "reason": "damaged"
+              }
+            },
+            "message": "请确认是否执行该操作。"
+          },
+          "result": null,
+          "pending_call": {
+            "name": "create_refund",
+            "arguments": {
+              "order_id": "O3001",
+              "reason": "damaged"
+            }
+          }
+        },
+        {
+          "status": "blocked",
+          "message": "订单状态refunded不可退款",
+          "decision": null,
+          "result": {
+            "ok": false,
+            "code": "REFUND_NOT_ALLOWED",
+            "data": {},
+            "message": "订单状态refunded不可退款"
+          },
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s008_missing_reason",
+      "passed": true,
+      "turns": [
+        {
+          "status": "clarify",
+          "message": "请说明退款原因。",
+          "decision": {
+            "action": "clarify",
+            "tool_call": null,
+            "message": "请说明退款原因。"
+          },
+          "result": null,
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s009_missing_order",
+      "passed": true,
+      "turns": [
+        {
+          "status": "clarify",
+          "message": "请提供需要退款的订单号。",
+          "decision": {
+            "action": "clarify",
+            "tool_call": null,
+            "message": "请提供需要退款的订单号。"
+          },
+          "result": null,
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s010_stale_confirmation",
+      "passed": true,
+      "turns": [
+        {
+          "status": "confirmation_required",
+          "message": "待执行：create_refund，参数：{'order_id': 'O1002', 'reason': 'damaged'}。回复“确认”或“取消”。",
+          "decision": {
+            "action": "confirm",
+            "tool_call": {
+              "name": "create_refund",
+              "arguments": {
+                "order_id": "O1002",
+                "reason": "damaged"
+              }
+            },
+            "message": "请确认是否执行该操作。"
+          },
+          "result": null,
+          "pending_call": {
+            "name": "create_refund",
+            "arguments": {
+              "order_id": "O1002",
+              "reason": "damaged"
+            }
+          }
+        },
+        {
+          "status": "executed",
+          "message": "OK: {'order_id': 'O1001', 'sku_id': 'SKU-RED-42', 'amount': 299.0, 'status': 'shipped'}",
+          "decision": {
+            "action": "call",
+            "tool_call": {
+              "name": "get_order",
+              "arguments": {
+                "order_id": "O1001"
+              }
+            },
+            "message": ""
+          },
+          "result": {
+            "ok": true,
+            "code": "OK",
+            "data": {
+              "order_id": "O1001",
+              "sku_id": "SKU-RED-42",
+              "amount": 299.0,
+              "status": "shipped"
+            },
+            "message": ""
+          },
+          "pending_call": null
+        },
+        {
+          "status": "clarify",
+          "message": "当前没有等待确认的操作。",
+          "decision": null,
+          "result": null,
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s011_no_pending",
+      "passed": true,
+      "turns": [
+        {
+          "status": "clarify",
+          "message": "当前没有等待确认的操作。",
+          "decision": null,
+          "result": null,
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "case_id": "s012_tracking",
+      "passed": true,
+      "turns": [
+        {
+          "status": "executed",
+          "message": "OK: {'tracking_no': 'SF123456', 'status': 'shipped'}",
+          "decision": {
+            "action": "call",
+            "tool_call": {
+              "name": "track_package",
+              "arguments": {
+                "order_id": "O1001"
+              }
+            },
+            "message": ""
+          },
+          "result": {
+            "ok": true,
+            "code": "OK",
+            "data": {
+              "tracking_no": "SF123456",
+              "status": "shipped"
+            },
+            "message": ""
+          },
+          "pending_call": null
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

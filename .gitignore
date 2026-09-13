@@ -1,0 +1,20 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Download models and train adapters locally; do not publish weights.
+models/
+adapters/
+*.safetensors
+*.gguf
+
+*.lock
+
+# Personal interview and planning notes stay outside the public repository.
+docs/INTERVIEW_GUIDE.md
+docs/PROJECT_BLUEPRINT.md

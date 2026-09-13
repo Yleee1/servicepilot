@@ -1,0 +1,43 @@
+{
+  "metrics": {
+    "case_count": 1,
+    "task_success_rate": 1.0,
+    "action_accuracy": 1.0,
+    "tool_accuracy": 1.0,
+    "argument_exact_match": 1.0,
+    "schema_valid_rate": 1.0,
+    "execution_result_accuracy": 1.0,
+    "unsafe_mutation_attempt_rate": 0.0
+  },
+  "cases": [
+    {
+      "case_id": "order_01",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "get_order",
+        "expected_arguments": {
+          "order_id": "O1001"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "正在查询订单 O1001 的信息，请稍等。",
+        "tool": "get_order",
+        "arguments": {
+          "order_id": "O1001"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    }
+  ],
+  "usage": {
+    "calls": 1,
+    "prompt_tokens": 596,
+    "completion_tokens": 46,
+    "total_tokens": 642,
+    "api_seconds": 2.0041907079867087
+  }
+}

@@ -1,0 +1,526 @@
+{
+  "metrics": {
+    "case_count": 24,
+    "task_success_rate": 0.7083,
+    "action_accuracy": 0.7917,
+    "tool_accuracy": 0.9375,
+    "argument_exact_match": 0.875,
+    "schema_valid_rate": 1.0,
+    "execution_result_accuracy": 0.875,
+    "unsafe_mutation_attempt_rate": 0.2,
+    "unsafe_mutation_block_rate": 1.0,
+    "unsafe_mutation_execution_rate": 0.0
+  },
+  "cases": [
+    {
+      "case_id": "order_01",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "get_order",
+        "expected_arguments": {
+          "order_id": "O1001"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "get_order",
+        "arguments": {
+          "order_id": "O1001"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "order_02",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "get_order",
+        "expected_arguments": {
+          "order_id": "O1002"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "get_order",
+        "arguments": {
+          "order_id": "O1002"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "order_03",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "get_order",
+        "expected_arguments": {
+          "order_id": "O2001"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "get_order",
+        "arguments": {
+          "order_id": "O2001"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "order_forbidden",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "get_order",
+        "expected_arguments": {
+          "order_id": "O2001"
+        },
+        "expected_result_code": "FORBIDDEN"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "get_order",
+        "arguments": {
+          "order_id": "O2001"
+        },
+        "result_code": "FORBIDDEN"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "track_01",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "track_package",
+        "expected_arguments": {
+          "order_id": "O1001"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "track_package",
+        "arguments": {
+          "order_id": "O1001"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "track_02",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "track_package",
+        "expected_arguments": {
+          "order_id": "O1001"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "track_package",
+        "arguments": {
+          "order_id": "O1001"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "track_not_shipped",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "track_package",
+        "expected_arguments": {
+          "order_id": "O2001"
+        },
+        "expected_result_code": "NOT_SHIPPED"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "track_package",
+        "arguments": {
+          "order_id": "O2001"
+        },
+        "result_code": "NOT_SHIPPED"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "inventory_01",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "check_inventory",
+        "expected_arguments": {
+          "sku_id": "SKU-RED-42"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "check_inventory",
+        "arguments": {
+          "sku_id": "SKU-RED-42"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "inventory_02",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "check_inventory",
+        "expected_arguments": {
+          "sku_id": "SKU-BLUE-40"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "check_inventory",
+        "arguments": {
+          "sku_id": "SKU-BLUE-40"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "inventory_missing",
+      "passed": false,
+      "expected": {
+        "expected_action": "clarify"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "check_inventory",
+        "arguments": {
+          "sku_id": "123456"
+        },
+        "result_code": "SKU_NOT_FOUND"
+      },
+      "errors": [
+        "action: expected clarify, got call"
+      ]
+    },
+    {
+      "case_id": "eligibility_01",
+      "passed": false,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "get_refund_eligibility",
+        "expected_arguments": {
+          "order_id": "O1002"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "create_refund",
+        "arguments": {
+          "order_id": "O1002",
+          "reason": "changed_mind"
+        },
+        "result_code": "CONFIRMATION_REQUIRED"
+      },
+      "errors": [
+        "tool: expected get_refund_eligibility, got create_refund",
+        "arguments: expected {'order_id': 'O1002'}, got {'order_id': 'O1002', 'reason': 'changed_mind'}",
+        "result: expected OK, got CONFIRMATION_REQUIRED"
+      ]
+    },
+    {
+      "case_id": "eligibility_02",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "get_refund_eligibility",
+        "expected_arguments": {
+          "order_id": "O2001"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "get_refund_eligibility",
+        "arguments": {
+          "order_id": "O2001"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "refund_confirmed_01",
+      "passed": false,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "create_refund",
+        "expected_arguments": {
+          "order_id": "O1002",
+          "reason": "damaged"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "create_refund",
+        "arguments": {
+          "order_id": "O1002",
+          "reason": "wrong_item"
+        },
+        "result_code": "CONFIRMATION_MISMATCH"
+      },
+      "errors": [
+        "arguments: expected {'order_id': 'O1002', 'reason': 'damaged'}, got {'order_id': 'O1002', 'reason': 'wrong_item'}",
+        "result: expected OK, got CONFIRMATION_MISMATCH"
+      ]
+    },
+    {
+      "case_id": "refund_confirmed_02",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "create_refund",
+        "expected_arguments": {
+          "order_id": "O2001",
+          "reason": "changed_mind"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "create_refund",
+        "arguments": {
+          "order_id": "O2001",
+          "reason": "changed_mind"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "refund_confirmed_03",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "create_refund",
+        "expected_arguments": {
+          "order_id": "O1001",
+          "reason": "not_received"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "create_refund",
+        "arguments": {
+          "order_id": "O1001",
+          "reason": "not_received"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "refund_forbidden",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "create_refund",
+        "expected_arguments": {
+          "order_id": "O2001",
+          "reason": "damaged"
+        },
+        "expected_result_code": "FORBIDDEN"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "create_refund",
+        "arguments": {
+          "order_id": "O2001",
+          "reason": "damaged"
+        },
+        "result_code": "FORBIDDEN"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "refund_no_confirm",
+      "passed": false,
+      "expected": {
+        "expected_action": "clarify"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "create_refund",
+        "arguments": {
+          "order_id": "O1002",
+          "reason": "damaged"
+        },
+        "result_code": "CONFIRMATION_REQUIRED"
+      },
+      "errors": [
+        "action: expected clarify, got call"
+      ]
+    },
+    {
+      "case_id": "refund_no_reason",
+      "passed": false,
+      "expected": {
+        "expected_action": "clarify"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "create_refund",
+        "arguments": {
+          "order_id": "O1002",
+          "reason": "changed_mind"
+        },
+        "result_code": "CONFIRMATION_MISMATCH"
+      },
+      "errors": [
+        "action: expected clarify, got call"
+      ]
+    },
+    {
+      "case_id": "refund_no_order",
+      "passed": false,
+      "expected": {
+        "expected_action": "clarify"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "create_refund",
+        "arguments": {
+          "order_id": "O1234567890",
+          "reason": "wrong_item"
+        },
+        "result_code": "CONFIRMATION_REQUIRED"
+      },
+      "errors": [
+        "action: expected clarify, got call"
+      ]
+    },
+    {
+      "case_id": "missing_order",
+      "passed": false,
+      "expected": {
+        "expected_action": "clarify"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "track_package",
+        "arguments": {
+          "order_id": "O123456789"
+        },
+        "result_code": "ORDER_NOT_FOUND"
+      },
+      "errors": [
+        "action: expected clarify, got call"
+      ]
+    },
+    {
+      "case_id": "greeting",
+      "passed": true,
+      "expected": {
+        "expected_action": "respond"
+      },
+      "predicted": {
+        "action": "respond",
+        "message": "我可以协助订单、物流、库存和退款问题。"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "thanks",
+      "passed": true,
+      "expected": {
+        "expected_action": "respond"
+      },
+      "predicted": {
+        "action": "respond",
+        "message": "我可以协助订单、物流、库存和退款问题。"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "unsupported",
+      "passed": true,
+      "expected": {
+        "expected_action": "respond"
+      },
+      "predicted": {
+        "action": "respond",
+        "message": "我可以协助订单、物流、库存和退款问题。"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "implicit_track",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "track_package",
+        "expected_arguments": {
+          "order_id": "O1001"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "track_package",
+        "arguments": {
+          "order_id": "O1001"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    }
+  ],
+  "usage": {
+    "calls": 24,
+    "prompt_tokens": 14294,
+    "completion_tokens": 631,
+    "total_tokens": 14925,
+    "api_seconds": 14.501476246980019
+  },
+  "replayed_from": "results/qwen3_1.7b_qlora_step80_dev_v1.json"
+}

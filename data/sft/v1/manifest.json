@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "split_strategy": "disjoint paraphrase template families",
+  "splits": {
+    "train": {
+      "count": 240,
+      "seed": 20260913,
+      "sha256": "f1335ebfb0000202cab8fa5868690277e0f9523f93fda52904c69d3b04e17972"
+    },
+    "valid": {
+      "count": 48,
+      "seed": 20260914,
+      "sha256": "94e669cb2cada293e2c90a90ac6954586fad0a3a11c11a0a427d75857186fb7f"
+    },
+    "test": {
+      "count": 48,
+      "seed": 20260915,
+      "sha256": "2409f04b3f2393f893c4f4a400c68459c3dc7e2fd46b720c98721ca25e133bb8"
+    }
+  }
+}

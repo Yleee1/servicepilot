@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "servicepilot"
+version = "0.1.0"
+description = "Executable and evaluated customer-service tool-calling agent"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+train-mlx = ["mlx-lm>=0.31,<0.32"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+servicepilot-eval = "servicepilot.eval_cli:main"
+servicepilot-generate-data = "servicepilot.data_generation:main"
+servicepilot-replay = "servicepilot.replay_cli:main"
+servicepilot-session-eval = "servicepilot.session_eval_cli:main"
+servicepilot-demo = "servicepilot.web_demo:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

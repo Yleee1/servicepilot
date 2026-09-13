@@ -1,0 +1,87 @@
+{
+  "metrics": {
+    "case_count": 3,
+    "task_success_rate": 1.0,
+    "action_accuracy": 1.0,
+    "tool_accuracy": 1.0,
+    "argument_exact_match": 1.0,
+    "schema_valid_rate": 1.0,
+    "execution_result_accuracy": 1.0,
+    "unsafe_mutation_attempt_rate": 0.0
+  },
+  "cases": [
+    {
+      "case_id": "order_01",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "get_order",
+        "expected_arguments": {
+          "order_id": "O1001"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "get_order",
+        "arguments": {
+          "order_id": "O1001"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "order_02",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "get_order",
+        "expected_arguments": {
+          "order_id": "O1002"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "get_order",
+        "arguments": {
+          "order_id": "O1002"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    },
+    {
+      "case_id": "order_03",
+      "passed": true,
+      "expected": {
+        "expected_action": "call",
+        "expected_tool": "get_order",
+        "expected_arguments": {
+          "order_id": "O2001"
+        },
+        "expected_result_code": "OK"
+      },
+      "predicted": {
+        "action": "call",
+        "message": "",
+        "tool": "get_order",
+        "arguments": {
+          "order_id": "O2001"
+        },
+        "result_code": "OK"
+      },
+      "errors": []
+    }
+  ],
+  "usage": {
+    "calls": 3,
+    "prompt_tokens": 1814,
+    "completion_tokens": 72,
+    "total_tokens": 1886,
+    "api_seconds": 2.8248321659630165
+  }
+}

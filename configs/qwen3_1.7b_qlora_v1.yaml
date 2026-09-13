@@ -1,0 +1,24 @@
+model: models/Qwen3-1.7B-4bit
+train: true
+data: data/sft/v1
+fine_tune_type: lora
+optimizer: adam
+mask_prompt: true
+num_layers: 16
+batch_size: 1
+iters: 240
+val_batches: 8
+learning_rate: 0.00002
+steps_per_report: 10
+steps_per_eval: 40
+adapter_path: adapters/qwen3_1.7b_servicepilot_v1
+save_every: 80
+test: true
+test_batches: -1
+max_seq_length: 1024
+grad_checkpoint: false
+seed: 42
+lora_parameters:
+  rank: 8
+  dropout: 0.0
+  scale: 20.0
