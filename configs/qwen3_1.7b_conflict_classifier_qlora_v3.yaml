@@ -1,0 +1,23 @@
+model: models/Qwen3-1.7B-4bit
+train: true
+data: data/sft/narrow_v3/conflict_classifier
+fine_tune_type: lora
+optimizer: adam
+mask_prompt: true
+num_layers: 8
+batch_size: 1
+iters: 40
+val_batches: 8
+learning_rate: 0.00001
+steps_per_report: 10
+steps_per_eval: 20
+adapter_path: adapters/qwen3_1.7b_servicepilot_conflict_classifier_v3
+save_every: 20
+test: false
+max_seq_length: 512
+grad_checkpoint: false
+seed: 73
+lora_parameters:
+  rank: 8
+  dropout: 0.0
+  scale: 20.0

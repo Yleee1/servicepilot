@@ -1,0 +1,21 @@
+{
+  "version": "memory_v3",
+  "splits": {
+    "dev": {
+      "count": 14,
+      "sha256": "658c316c4e2ceb004b38b696b3bca232657c914dc118353e905788254d7119c1",
+      "path": "data/eval/memory_v3/dev_v3.jsonl"
+    },
+    "heldout": {
+      "count": 14,
+      "sha256": "247b76955746094cfe3f75948f70dd1779cfe8ba2a947e5f8f3530e48f0f70be",
+      "path": "data/eval/memory_v3/heldout_v3.jsonl"
+    },
+    "frozen": {
+      "count": 14,
+      "sha256": "0944e5b3d38228efc6339830717e574c1e43cc91839cdfc7b513162b5fb14102",
+      "path": "data/eval/memory_v3/frozen_v3.jsonl"
+    }
+  },
+  "isolation_note": "No exact case_id/content overlap across splits. Splits share the same scenario taxonomy and are author-generated; frozen still requires independent reviewer sign-off."
+}

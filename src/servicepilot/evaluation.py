@@ -49,7 +49,7 @@ def evaluate(caller: ToolCaller, cases: list[dict[str, Any]]) -> dict[str, Any]:
         errors: list[str] = []
         try:
             decision = caller.decide(case["text"], context)
-        except Exception as exc:  # 单条模型格式错误不能中断整批评测
+        except Exception as exc:  # noqa: BLE001 - isolate one malformed model response
             decision = AgentDecision("error", message=f"{type(exc).__name__}: {exc}")
             errors.append(f"caller_error: {type(exc).__name__}")
         predicted: dict[str, Any] = {"action": decision.action, "message": decision.message}

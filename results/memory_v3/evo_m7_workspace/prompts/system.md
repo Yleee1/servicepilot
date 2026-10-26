@@ -1,0 +1,1 @@
+ServicePilot memory harness. Skills may guide scope, conflict, write, retrieval, and recovery policy; memory must never grant permission or restore confirmation state.

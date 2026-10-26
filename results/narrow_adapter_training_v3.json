@@ -1,0 +1,11 @@
+{
+  "model": "models/Qwen3-1.7B-4bit",
+  "configuration": {"iters": 40, "num_layers": 8, "rank": 8, "learning_rate": 0.00001, "mask_prompt": true, "seed": 73},
+  "runs": {
+    "router": {"final_train_loss": 0.007, "final_val_loss": 0.015, "peak_memory_gb": 1.431, "checkpoint_sha256": "edb379f888f5f523db0493b8087fc44f3422648cb1e73f29b3900d91305759af"},
+    "argument": {"final_train_loss": 0.049, "final_val_loss": 0.041, "peak_memory_gb": 1.431, "checkpoint_sha256": "cd5491c50c2126debb04e37a0e7f85aacdf4fa77a37d05b0d59475e33fc07586"},
+    "memory_classifier": {"final_train_loss": 0.031, "final_val_loss": 0.036, "peak_memory_gb": 1.431, "checkpoint_sha256": "7be8b8dc3424989bf5d5aa8ad9aba438acb7a09d2499c2458f12f292d61eea27"},
+    "conflict_classifier": {"final_train_loss": 0.055, "final_val_loss": 0.015, "peak_memory_gb": 1.521, "checkpoint_sha256": "62c55ec75dfc8b9e9f0ff49794ce701bc34dae3425db4b5d32c1cc9946f9f61d"}
+  },
+  "warning": "Training loss is not used as an ability claim; independent test exact-match is in results/narrow_adapter_eval_v3.json."
+}

@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+from threading import Lock
 
 from .schemas import ExecutionContext, ToolCall, ToolDefinition, ToolResult
-from .store import DemoStore
+from .store import DemoStore, SQLiteDemoStore
 from .validation import ToolValidationError, validate_arguments
-
 
 ORDER_ID = {"type": "string", "pattern": "^O[0-9]+$", "minLength": 2}
 USER_ID = {"type": "string", "pattern": "^U[0-9]+$", "minLength": 2}
@@ -52,6 +52,22 @@ TOOL_DEFINITIONS = {
             "additionalProperties": False,
         },
     ),
+    "propose_refund": ToolDefinition(
+        name="propose_refund",
+        description="生成退款提案，供确定性门禁转换为待审批动作；本工具不写业务状态",
+        parameters={
+            "type": "object",
+            "properties": {
+                "order_id": ORDER_ID,
+                "reason": {
+                    "type": "string",
+                    "enum": ["not_received", "damaged", "wrong_item", "changed_mind"],
+                },
+            },
+            "required": ["order_id", "reason"],
+            "additionalProperties": False,
+        },
+    ),
     "create_refund": ToolDefinition(
         name="create_refund",
         description="在用户明确确认后创建退款申请",
@@ -73,15 +89,18 @@ TOOL_DEFINITIONS = {
 
 
 class ToolRegistry:
-    def __init__(self, store: DemoStore | None = None) -> None:
+    def __init__(self, store: DemoStore | SQLiteDemoStore | None = None) -> None:
         self.store = store or DemoStore()
         self.handlers: dict[str, Callable[[dict, ExecutionContext], ToolResult]] = {
             "get_order": self._get_order,
             "track_package": self._track_package,
             "check_inventory": self._check_inventory,
             "get_refund_eligibility": self._get_refund_eligibility,
+            "propose_refund": self._propose_refund,
             "create_refund": self._create_refund,
         }
+        self._idempotency_results: dict[str, ToolResult] = {}
+        self._mutation_lock = Lock()
 
     def execute(self, call: ToolCall, context: ExecutionContext) -> ToolResult:
         definition = TOOL_DEFINITIONS.get(call.name)
@@ -102,8 +121,38 @@ class ToolRegistry:
                 )
         return self.handlers[call.name](call.arguments, context)
 
+    def execute_once(
+        self,
+        call: ToolCall,
+        context: ExecutionContext,
+        *,
+        idempotency_key: str,
+    ) -> ToolResult:
+        """Serialize mutations and return the original result for duplicate resumes."""
+
+        if not idempotency_key:
+            return ToolResult(False, "IDEMPOTENCY_KEY_REQUIRED", message="写操作缺少幂等键")
+        with self._mutation_lock:
+            cached = self._idempotency_results.get(idempotency_key)
+            if cached is not None:
+                return cached
+            durable_executor = getattr(self.store, "execute_refund_once", None)
+            if call.name == "create_refund" and isinstance(self.store, SQLiteDemoStore):
+                result = durable_executor(
+                    order_id=str(call.arguments["order_id"]),
+                    user_id=context.user_id,
+                    idempotency_key=idempotency_key,
+                )
+                if result.ok:
+                    self._idempotency_results[idempotency_key] = result
+                return result
+            result = self.execute(call, context)
+            if result.ok:
+                self._idempotency_results[idempotency_key] = result
+            return result
+
     def _owned_order(self, order_id: str, context: ExecutionContext):
-        order = self.store.orders.get(order_id)
+        order = self.store.get_order(order_id)
         if order is None:
             return None, ToolResult(False, "ORDER_NOT_FOUND", message="订单不存在")
         if order.user_id != context.user_id:
@@ -130,9 +179,10 @@ class ToolRegistry:
 
     def _check_inventory(self, arguments: dict, context: ExecutionContext) -> ToolResult:
         sku_id = arguments["sku_id"]
-        if sku_id not in self.store.inventory:
+        available = self.store.get_inventory(sku_id)
+        if available is None:
             return ToolResult(False, "SKU_NOT_FOUND", message="SKU不存在")
-        return ToolResult(True, "OK", {"sku_id": sku_id, "available": self.store.inventory[sku_id]})
+        return ToolResult(True, "OK", {"sku_id": sku_id, "available": available})
 
     def _get_refund_eligibility(self, arguments: dict, context: ExecutionContext) -> ToolResult:
         order, error = self._owned_order(arguments["order_id"], context)
@@ -140,6 +190,16 @@ class ToolRegistry:
             return error
         eligible = order.status in {"paid", "shipped", "delivered"}
         return ToolResult(True, "OK", {"eligible": eligible, "status": order.status})
+
+    def _propose_refund(self, arguments: dict, context: ExecutionContext) -> ToolResult:
+        order, error = self._owned_order(arguments["order_id"], context)
+        if error:
+            return error
+        return ToolResult(
+            True,
+            "PROPOSED",
+            {"order_id": order.order_id, "reason": arguments["reason"], "writes_state": False},
+        )
 
     def _create_refund(self, arguments: dict, context: ExecutionContext) -> ToolResult:
         order, error = self._owned_order(arguments["order_id"], context)

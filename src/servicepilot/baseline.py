@@ -4,7 +4,6 @@ import re
 
 from .schemas import AgentDecision, ExecutionContext, ToolCall
 
-
 ORDER_RE = re.compile(r"\bO\d+\b", re.IGNORECASE)
 SKU_RE = re.compile(r"\bSKU[-_A-Z0-9]+\b", re.IGNORECASE)
 

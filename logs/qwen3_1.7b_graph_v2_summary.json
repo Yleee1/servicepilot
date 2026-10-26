@@ -1,0 +1,20 @@
+{
+  "config": "configs/qwen3_1.7b_graph_qlora_v2.yaml",
+  "model": "models/Qwen3-1.7B-4bit",
+  "dataset": "data/sft/graph_v2",
+  "train_examples": 255,
+  "valid_examples": 42,
+  "test_examples": 43,
+  "iterations": 80,
+  "validation_loss": {
+    "1": 1.961,
+    "20": 0.372,
+    "40": 0.168,
+    "60": 0.060,
+    "80": 0.076
+  },
+  "final_train_loss": 0.003,
+  "peak_memory_gb": 2.362,
+  "status": "completed",
+  "note": "This compact record was transcribed from the completed local MLX-LM run; frozen evaluation is stored separately."
+}

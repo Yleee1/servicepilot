@@ -5,7 +5,6 @@ from dataclasses import dataclass
 from .schemas import AgentDecision, ExecutionContext, ToolCall, ToolResult
 from .tools import TOOL_DEFINITIONS, ToolRegistry
 
-
 CONFIRM_WORDS = {"确认", "确定", "同意", "yes", "confirm", "确认执行"}
 CANCEL_WORDS = {"取消", "算了", "不要了", "no", "cancel"}
 
@@ -159,8 +158,14 @@ class ServiceSession:
     @staticmethod
     def _is_refund_operation(text: str) -> bool:
         lowered = text.lower()
-        operation_words = ("申请退款", "我要退款", "帮我退款", "退掉", "refund it", "issue a refund")
-        advisory_words = ("能不能", "是否", "资格", "条件", "先别", "咨询", "不要执行", "eligible")
+        operation_words = (
+            "申请退款", "我要退款", "帮我退款", "退掉", "退款", "退货", "refund",
+            "refund it", "issue a refund",
+        )
+        advisory_words = (
+            "能不能", "是否", "资格", "条件", "先别", "咨询", "不要执行",
+            "不要退款", "别退款", "eligible",
+        )
         return any(word in lowered for word in operation_words) and not any(
             word in lowered for word in advisory_words
         )

@@ -1,0 +1,1590 @@
+{
+  "suite": "narrow_adapter_v3_test",
+  "scope": "independent synthetic test split; exact JSON match, not end-to-end scenario success",
+  "model": "models/Qwen3-1.7B-4bit",
+  "tasks": {
+    "router": {
+      "base": {
+        "case_count": 12,
+        "exact_match": 0.3333333333333333,
+        "json_valid_rate": 1.0,
+        "elapsed_seconds": 3.585644083097577,
+        "usage": {
+          "calls": 12,
+          "prompt_tokens": 966,
+          "completion_tokens": 232,
+          "total_tokens": 1198,
+          "api_seconds": 3.575710166245699
+        },
+        "records": [
+          {
+            "case_index": 0,
+            "passed": false,
+            "expected": {
+              "intent": "order_status",
+              "expert": [
+                "order"
+              ]
+            },
+            "actual": {
+              "intent": "order_status",
+              "expert": [
+                "order",
+                "inventory",
+                "refund"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 1,
+            "passed": false,
+            "expected": {
+              "intent": "tracking",
+              "expert": [
+                "order"
+              ]
+            },
+            "actual": {
+              "intent": "order_status",
+              "expert": [
+                "order",
+                "inventory",
+                "refund"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 2,
+            "passed": true,
+            "expected": {
+              "intent": "inventory",
+              "expert": [
+                "inventory"
+              ]
+            },
+            "actual": {
+              "intent": "inventory",
+              "expert": [
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 3,
+            "passed": false,
+            "expected": {
+              "intent": "compound",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "actual": {
+              "intent": "order_status",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 4,
+            "passed": false,
+            "expected": {
+              "intent": "order_status",
+              "expert": [
+                "order"
+              ]
+            },
+            "actual": {
+              "intent": "order_status",
+              "expert": [
+                "order",
+                "inventory",
+                "refund"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 5,
+            "passed": true,
+            "expected": {
+              "intent": "inventory",
+              "expert": [
+                "inventory"
+              ]
+            },
+            "actual": {
+              "intent": "inventory",
+              "expert": [
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 6,
+            "passed": true,
+            "expected": {
+              "intent": "out_of_scope",
+              "expert": []
+            },
+            "actual": {
+              "intent": "out_of_scope",
+              "expert": []
+            },
+            "error": null
+          },
+          {
+            "case_index": 7,
+            "passed": false,
+            "expected": {
+              "intent": "compound",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "actual": {
+              "intent": "order_status",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 8,
+            "passed": false,
+            "expected": {
+              "intent": "compound",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "actual": {
+              "intent": "order_status",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 9,
+            "passed": true,
+            "expected": {
+              "intent": "out_of_scope",
+              "expert": []
+            },
+            "actual": {
+              "intent": "out_of_scope",
+              "expert": []
+            },
+            "error": null
+          },
+          {
+            "case_index": 10,
+            "passed": false,
+            "expected": {
+              "intent": "refund",
+              "expert": [
+                "order",
+                "refund"
+              ]
+            },
+            "actual": {
+              "intent": "refund",
+              "expert": [
+                "refund"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 11,
+            "passed": false,
+            "expected": {
+              "intent": "order_status",
+              "expert": [
+                "order"
+              ]
+            },
+            "actual": {
+              "intent": "order_status",
+              "expert": [
+                "order",
+                "inventory",
+                "refund"
+              ]
+            },
+            "error": null
+          }
+        ]
+      },
+      "adapter": {
+        "case_count": 12,
+        "exact_match": 0.9166666666666666,
+        "json_valid_rate": 1.0,
+        "elapsed_seconds": 3.265872708056122,
+        "usage": {
+          "calls": 12,
+          "prompt_tokens": 966,
+          "completion_tokens": 161,
+          "total_tokens": 1127,
+          "api_seconds": 3.256399499485269
+        },
+        "records": [
+          {
+            "case_index": 0,
+            "passed": true,
+            "expected": {
+              "intent": "order_status",
+              "expert": [
+                "order"
+              ]
+            },
+            "actual": {
+              "intent": "order_status",
+              "expert": [
+                "order"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 1,
+            "passed": true,
+            "expected": {
+              "intent": "tracking",
+              "expert": [
+                "order"
+              ]
+            },
+            "actual": {
+              "intent": "tracking",
+              "expert": [
+                "order"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 2,
+            "passed": true,
+            "expected": {
+              "intent": "inventory",
+              "expert": [
+                "inventory"
+              ]
+            },
+            "actual": {
+              "intent": "inventory",
+              "expert": [
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 3,
+            "passed": true,
+            "expected": {
+              "intent": "compound",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "actual": {
+              "intent": "compound",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 4,
+            "passed": true,
+            "expected": {
+              "intent": "order_status",
+              "expert": [
+                "order"
+              ]
+            },
+            "actual": {
+              "intent": "order_status",
+              "expert": [
+                "order"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 5,
+            "passed": true,
+            "expected": {
+              "intent": "inventory",
+              "expert": [
+                "inventory"
+              ]
+            },
+            "actual": {
+              "intent": "inventory",
+              "expert": [
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 6,
+            "passed": true,
+            "expected": {
+              "intent": "out_of_scope",
+              "expert": []
+            },
+            "actual": {
+              "intent": "out_of_scope",
+              "expert": []
+            },
+            "error": null
+          },
+          {
+            "case_index": 7,
+            "passed": true,
+            "expected": {
+              "intent": "compound",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "actual": {
+              "intent": "compound",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 8,
+            "passed": true,
+            "expected": {
+              "intent": "compound",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "actual": {
+              "intent": "compound",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 9,
+            "passed": true,
+            "expected": {
+              "intent": "out_of_scope",
+              "expert": []
+            },
+            "actual": {
+              "intent": "out_of_scope",
+              "expert": []
+            },
+            "error": null
+          },
+          {
+            "case_index": 10,
+            "passed": false,
+            "expected": {
+              "intent": "refund",
+              "expert": [
+                "order",
+                "refund"
+              ]
+            },
+            "actual": {
+              "intent": "refund",
+              "expert": [
+                "order",
+                "inventory"
+              ]
+            },
+            "error": null
+          },
+          {
+            "case_index": 11,
+            "passed": true,
+            "expected": {
+              "intent": "order_status",
+              "expert": [
+                "order"
+              ]
+            },
+            "actual": {
+              "intent": "order_status",
+              "expert": [
+                "order"
+              ]
+            },
+            "error": null
+          }
+        ]
+      },
+      "exact_match_delta": 0.5833333333333333
+    },
+    "argument": {
+      "base": {
+        "case_count": 12,
+        "exact_match": 0.0,
+        "json_valid_rate": 1.0,
+        "elapsed_seconds": 3.7957835828419775,
+        "usage": {
+          "calls": 12,
+          "prompt_tokens": 820,
+          "completion_tokens": 265,
+          "total_tokens": 1085,
+          "api_seconds": 3.7927966655697674
+        },
+        "records": [
+          {
+            "case_index": 0,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "track_package",
+              "arguments": {
+                "order_id": "A6001"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 1,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "ARG-002"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 2,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "A6047"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 3,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "track_package",
+              "arguments": {
+                "order_id": "A6007"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 4,
+            "passed": false,
+            "expected": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {
+                "required_identifier": "订单号"
+              }
+            },
+            "error": null
+          },
+          {
+            "case_index": 5,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "A6024"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 6,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "ARG-068"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 7,
+            "passed": false,
+            "expected": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {
+                "required_identifier": "SKU"
+              }
+            },
+            "error": null
+          },
+          {
+            "case_index": 8,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "ARG-050"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 9,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "track_package",
+              "arguments": {
+                "order_id": "A6091"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 10,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "A6065"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 11,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "A6041"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": "null",
+              "arguments": {}
+            },
+            "error": null
+          }
+        ]
+      },
+      "adapter": {
+        "case_count": 12,
+        "exact_match": 0.5,
+        "json_valid_rate": 1.0,
+        "elapsed_seconds": 4.040972833056003,
+        "usage": {
+          "calls": 12,
+          "prompt_tokens": 820,
+          "completion_tokens": 244,
+          "total_tokens": 1064,
+          "api_seconds": 4.037907456047833
+        },
+        "records": [
+          {
+            "case_index": 0,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "track_package",
+              "arguments": {
+                "order_id": "A6001"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 1,
+            "passed": true,
+            "expected": {
+              "action": "call",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "ARG-002"
+              }
+            },
+            "actual": {
+              "action": "call",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "ARG-002"
+              }
+            },
+            "error": null
+          },
+          {
+            "case_index": 2,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "A6047"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 3,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "track_package",
+              "arguments": {
+                "order_id": "A6007"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 4,
+            "passed": true,
+            "expected": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 5,
+            "passed": true,
+            "expected": {
+              "action": "call",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "A6024"
+              }
+            },
+            "actual": {
+              "action": "call",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "A6024"
+              }
+            },
+            "error": null
+          },
+          {
+            "case_index": 6,
+            "passed": true,
+            "expected": {
+              "action": "call",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "ARG-068"
+              }
+            },
+            "actual": {
+              "action": "call",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "ARG-068"
+              }
+            },
+            "error": null
+          },
+          {
+            "case_index": 7,
+            "passed": true,
+            "expected": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 8,
+            "passed": true,
+            "expected": {
+              "action": "call",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "ARG-050"
+              }
+            },
+            "actual": {
+              "action": "call",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "ARG-050"
+              }
+            },
+            "error": null
+          },
+          {
+            "case_index": 9,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "track_package",
+              "arguments": {
+                "order_id": "A6091"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 10,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "A6065"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "error": null
+          },
+          {
+            "case_index": 11,
+            "passed": false,
+            "expected": {
+              "action": "call",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "A6041"
+              }
+            },
+            "actual": {
+              "action": "clarify",
+              "tool": null,
+              "arguments": {}
+            },
+            "error": null
+          }
+        ]
+      },
+      "exact_match_delta": 0.5
+    },
+    "memory_classifier": {
+      "base": {
+        "case_count": 12,
+        "exact_match": 0.0,
+        "json_valid_rate": 1.0,
+        "elapsed_seconds": 4.031261916970834,
+        "usage": {
+          "calls": 12,
+          "prompt_tokens": 890,
+          "completion_tokens": 291,
+          "total_tokens": 1181,
+          "api_seconds": 4.028117916546762
+        },
+        "records": [
+          {
+            "case_index": 0,
+            "passed": false,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "api_key",
+              "scope_type": "user_statement"
+            },
+            "error": null
+          },
+          {
+            "case_index": 1,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "procedural",
+              "scope_type": "organization"
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "verifier",
+              "scope_type": "internal"
+            },
+            "error": null
+          },
+          {
+            "case_index": 2,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "procedural",
+              "scope_type": "organization"
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "verifier",
+              "scope_type": "internal"
+            },
+            "error": null
+          },
+          {
+            "case_index": 3,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "procedural",
+              "scope_type": "organization"
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "verifier",
+              "scope_type": "internal"
+            },
+            "error": null
+          },
+          {
+            "case_index": 4,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "procedural",
+              "scope_type": "organization"
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "verifier",
+              "scope_type": "internal"
+            },
+            "error": null
+          },
+          {
+            "case_index": 5,
+            "passed": false,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "user_preference",
+              "scope_type": "personal"
+            },
+            "error": null
+          },
+          {
+            "case_index": 6,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "semantic",
+              "scope_type": "user"
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "user_instruction",
+              "scope_type": "session"
+            },
+            "error": null
+          },
+          {
+            "case_index": 7,
+            "passed": false,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "system",
+              "scope_type": "internal"
+            },
+            "error": null
+          },
+          {
+            "case_index": 8,
+            "passed": false,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "api_key",
+              "scope_type": "user_statement"
+            },
+            "error": null
+          },
+          {
+            "case_index": 9,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "semantic",
+              "scope_type": "project"
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "user_statement",
+              "scope_type": "project"
+            },
+            "error": null
+          },
+          {
+            "case_index": 10,
+            "passed": false,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "system",
+              "scope_type": "internal"
+            },
+            "error": null
+          },
+          {
+            "case_index": 11,
+            "passed": false,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": true,
+              "memory_type": "api_key",
+              "scope_type": "user_statement"
+            },
+            "error": null
+          }
+        ]
+      },
+      "adapter": {
+        "case_count": 12,
+        "exact_match": 0.5,
+        "json_valid_rate": 1.0,
+        "elapsed_seconds": 3.6517357078846544,
+        "usage": {
+          "calls": 12,
+          "prompt_tokens": 890,
+          "completion_tokens": 204,
+          "total_tokens": 1094,
+          "api_seconds": 3.6487376233562827
+        },
+        "records": [
+          {
+            "case_index": 0,
+            "passed": true,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 1,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "procedural",
+              "scope_type": "organization"
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 2,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "procedural",
+              "scope_type": "organization"
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 3,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "procedural",
+              "scope_type": "organization"
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 4,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "procedural",
+              "scope_type": "organization"
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 5,
+            "passed": true,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 6,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "semantic",
+              "scope_type": "user"
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 7,
+            "passed": true,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 8,
+            "passed": true,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 9,
+            "passed": false,
+            "expected": {
+              "write": true,
+              "memory_type": "semantic",
+              "scope_type": "project"
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 10,
+            "passed": true,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          },
+          {
+            "case_index": 11,
+            "passed": true,
+            "expected": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "actual": {
+              "write": false,
+              "memory_type": null,
+              "scope_type": null
+            },
+            "error": null
+          }
+        ]
+      },
+      "exact_match_delta": 0.5
+    },
+    "conflict_classifier": {
+      "base": {
+        "case_count": 12,
+        "exact_match": 0.16666666666666666,
+        "json_valid_rate": 1.0,
+        "elapsed_seconds": 2.6937114999163896,
+        "usage": {
+          "calls": 12,
+          "prompt_tokens": 1433,
+          "completion_tokens": 104,
+          "total_tokens": 1537,
+          "api_seconds": 2.6903729592449963
+        },
+        "records": [
+          {
+            "case_index": 0,
+            "passed": false,
+            "expected": {
+              "decision": "temporal_update"
+            },
+            "actual": {
+              "decision": "low_authority_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 1,
+            "passed": true,
+            "expected": {
+              "decision": "duplicate"
+            },
+            "actual": {
+              "decision": "duplicate"
+            },
+            "error": null
+          },
+          {
+            "case_index": 2,
+            "passed": false,
+            "expected": {
+              "decision": "scope_override"
+            },
+            "actual": {
+              "decision": "true_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 3,
+            "passed": false,
+            "expected": {
+              "decision": "low_authority_conflict"
+            },
+            "actual": {
+              "decision": "true_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 4,
+            "passed": false,
+            "expected": {
+              "decision": "new"
+            },
+            "actual": {
+              "decision": "low_authority_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 5,
+            "passed": false,
+            "expected": {
+              "decision": "low_authority_conflict"
+            },
+            "actual": {
+              "decision": "true_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 6,
+            "passed": false,
+            "expected": {
+              "decision": "true_conflict"
+            },
+            "actual": {
+              "decision": "low_authority_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 7,
+            "passed": false,
+            "expected": {
+              "decision": "true_conflict"
+            },
+            "actual": {
+              "decision": "low_authority_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 8,
+            "passed": true,
+            "expected": {
+              "decision": "duplicate"
+            },
+            "actual": {
+              "decision": "duplicate"
+            },
+            "error": null
+          },
+          {
+            "case_index": 9,
+            "passed": false,
+            "expected": {
+              "decision": "true_conflict"
+            },
+            "actual": {
+              "decision": "low_authority_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 10,
+            "passed": false,
+            "expected": {
+              "decision": "new"
+            },
+            "actual": {
+              "decision": "low_authority_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 11,
+            "passed": false,
+            "expected": {
+              "decision": "low_authority_conflict"
+            },
+            "actual": {
+              "decision": "true_conflict"
+            },
+            "error": null
+          }
+        ]
+      },
+      "adapter": {
+        "case_count": 12,
+        "exact_match": 0.9166666666666666,
+        "json_valid_rate": 1.0,
+        "elapsed_seconds": 2.8709655408747494,
+        "usage": {
+          "calls": 12,
+          "prompt_tokens": 1433,
+          "completion_tokens": 89,
+          "total_tokens": 1522,
+          "api_seconds": 2.867194292601198
+        },
+        "records": [
+          {
+            "case_index": 0,
+            "passed": true,
+            "expected": {
+              "decision": "temporal_update"
+            },
+            "actual": {
+              "decision": "temporal_update"
+            },
+            "error": null
+          },
+          {
+            "case_index": 1,
+            "passed": true,
+            "expected": {
+              "decision": "duplicate"
+            },
+            "actual": {
+              "decision": "duplicate"
+            },
+            "error": null
+          },
+          {
+            "case_index": 2,
+            "passed": true,
+            "expected": {
+              "decision": "scope_override"
+            },
+            "actual": {
+              "decision": "scope_override"
+            },
+            "error": null
+          },
+          {
+            "case_index": 3,
+            "passed": true,
+            "expected": {
+              "decision": "low_authority_conflict"
+            },
+            "actual": {
+              "decision": "low_authority_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 4,
+            "passed": true,
+            "expected": {
+              "decision": "new"
+            },
+            "actual": {
+              "decision": "new"
+            },
+            "error": null
+          },
+          {
+            "case_index": 5,
+            "passed": true,
+            "expected": {
+              "decision": "low_authority_conflict"
+            },
+            "actual": {
+              "decision": "low_authority_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 6,
+            "passed": true,
+            "expected": {
+              "decision": "true_conflict"
+            },
+            "actual": {
+              "decision": "true_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 7,
+            "passed": true,
+            "expected": {
+              "decision": "true_conflict"
+            },
+            "actual": {
+              "decision": "true_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 8,
+            "passed": true,
+            "expected": {
+              "decision": "duplicate"
+            },
+            "actual": {
+              "decision": "duplicate"
+            },
+            "error": null
+          },
+          {
+            "case_index": 9,
+            "passed": true,
+            "expected": {
+              "decision": "true_conflict"
+            },
+            "actual": {
+              "decision": "true_conflict"
+            },
+            "error": null
+          },
+          {
+            "case_index": 10,
+            "passed": true,
+            "expected": {
+              "decision": "new"
+            },
+            "actual": {
+              "decision": "new"
+            },
+            "error": null
+          },
+          {
+            "case_index": 11,
+            "passed": false,
+            "expected": {
+              "decision": "low_authority_conflict"
+            },
+            "actual": {
+              "decision": "new"
+            },
+            "error": null
+          }
+        ]
+      },
+      "exact_match_delta": 0.75
+    }
+  }
+}

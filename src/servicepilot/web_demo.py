@@ -7,11 +7,10 @@ from dataclasses import asdict
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from .baseline import RuleBasedToolCaller
+from .graph_session import GraphServiceSession
 from .llm_client import OpenAICompatibleJSONClient
 from .mlx_client import MLXJSONClient
 from .model_caller import ModelToolCaller
-from .session import ProposalCaller, ServiceSession
-
 
 PAGE = r"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -26,7 +25,7 @@ PAGE = r"""<!doctype html>
 .side{padding:17px}.side h3{margin:6px 0 12px}.quick{display:flex;flex-wrap:wrap;gap:8px}.quick button{font-size:12px}.trace{font:12px/1.5 ui-monospace,SFMono-Regular;color:#bcd0e8;background:#071321;padding:12px;border-radius:10px;min-height:160px;white-space:pre-wrap;overflow:auto}.orders{display:grid;gap:7px}.order{padding:9px;border:1px solid var(--line);border-radius:9px;color:#cfe0f4}.foot{margin-top:10px;font-size:12px;color:var(--muted)}
 @media(max-width:800px){.grid{grid-template-columns:1fr}.chat{height:420px}}
 </style></head><body><div class="wrap">
-<div class="head"><div><div class="brand">Service<span>Pilot</span></div><div class="sub">Executable customer-service agent · schema · policy · audit</div></div><div><select id="uid"><option>U001</option><option>U002</option><option>U003</option></select> <button onclick="resetSession()">重置会话</button></div></div>
+<div class="head"><div><div class="brand">Service<span>Pilot</span></div><div class="sub">LangGraph multi-agent · least privilege · HITL · persistent checkpoint</div></div><div><select id="uid"><option>U001</option><option>U002</option><option>U003</option></select> <button onclick="restartSession()">模拟进程重启</button> <button onclick="resetSession()">重置会话</button></div></div>
 <div class="grid"><section class="card"><div id="chat" class="chat"><div class="bubble agent"><span class="status">ready</span><br>可以查询订单、物流、库存，或通过两轮确认申请退款。</div></div>
 <div class="composer"><input id="msg" placeholder="例如：O1002 商品坏了，帮我退款" autocomplete="off"><button class="primary" onclick="sendMessage()">发送</button></div></section>
 <aside class="card side"><h3>快捷演示</h3><div class="quick"><button onclick="quick('查一下订单 O1001')">查询订单</button><button onclick="quick('O1001 的物流到哪了')">查询物流</button><button onclick="quick('O1002 商品坏了，帮我退款')">申请退款</button><button onclick="quick('确认')">确认</button><button onclick="quick('取消')">取消</button></div>
@@ -37,19 +36,43 @@ function bubble(role,text,status){const d=document.createElement('div');d.classN
 function renderOrders(data){orders.replaceChildren();Object.values(data).forEach(o=>{const d=document.createElement('div');d.className='order';d.textContent=`${o.order_id} · ${o.status} · ${o.sku_id}`;orders.append(d)})}
 async function sendMessage(){const text=input.value.trim();if(!text)return;input.value='';bubble('user',text);const r=await fetch('/api/message',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});const data=await r.json();bubble('agent',data.turn.message,data.turn.status);trace.textContent=JSON.stringify(data.turn,null,2);renderOrders(data.orders)}
 function quick(t){input.value=t;sendMessage()} async function resetSession(){await fetch('/api/reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:document.getElementById('uid').value})});chat.replaceChildren();bubble('agent','会话与订单沙箱已重置。','reset');trace.textContent='等待请求…';loadState()}
+async function restartSession(){const r=await fetch('/api/restart',{method:'POST'});const d=await r.json();bubble('agent','已重建 GraphServiceSession，并从 SQLite checkpoint 恢复同一 thread。','restart');trace.textContent=JSON.stringify(d,null,2);renderOrders(d.orders)}
 async function loadState(){const r=await fetch('/api/state');const d=await r.json();renderOrders(d.orders)} input.addEventListener('keydown',e=>{if(e.key==='Enter')sendMessage()});loadState();
 </script></body></html>"""
 
 
 class DemoState:
-    def __init__(self, caller, user_id: str = "U001") -> None:
+    def __init__(
+        self,
+        caller,
+        user_id: str = "U001",
+        *,
+        checkpoint_path: str | None = None,
+    ) -> None:
         self.caller = caller
+        self.checkpoint_path = checkpoint_path
         self.lock = threading.Lock()
-        self.session = ServiceSession(user_id, ProposalCaller(caller))
+        self.session = GraphServiceSession(user_id, caller, sqlite_path=checkpoint_path)
 
     def reset(self, user_id: str) -> dict:
         with self.lock:
-            self.session = ServiceSession(user_id, ProposalCaller(self.caller))
+            self.session.close()
+            self.session = GraphServiceSession(
+                user_id, self.caller, sqlite_path=self.checkpoint_path
+            )
+            return self.snapshot()
+
+    def restart(self) -> dict:
+        with self.lock:
+            thread_id = self.session.thread_id
+            user_id = self.session.user_id
+            self.session.close()
+            self.session = GraphServiceSession(
+                user_id,
+                self.caller,
+                thread_id=thread_id,
+                sqlite_path=self.checkpoint_path,
+            )
             return self.snapshot()
 
     def message(self, text: str) -> dict:
@@ -88,6 +111,8 @@ def make_handler(state: DemoState):
                     if user_id not in {"U001", "U002", "U003"}:
                         return self._json({"error": "invalid user_id"}, 400)
                     return self._json(state.reset(user_id))
+                if self.path == "/api/restart":
+                    return self._json(state.restart())
                 self.send_error(404)
             except (ValueError, json.JSONDecodeError) as exc:
                 self._json({"error": str(exc)}, 400)
@@ -126,8 +151,16 @@ def main() -> None:
     parser.add_argument("--adapter-weights")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument(
+        "--checkpoint-path", default="data/demo/servicepilot_checkpoints.sqlite"
+    )
     args = parser.parse_args()
-    server = ThreadingHTTPServer((args.host, args.port), make_handler(DemoState(build_caller(args))))
+    server = ThreadingHTTPServer(
+        (args.host, args.port),
+        make_handler(
+            DemoState(build_caller(args), checkpoint_path=args.checkpoint_path)
+        ),
+    )
     print(f"ServicePilot demo: http://{args.host}:{args.port}", flush=True)
     try:
         server.serve_forever()

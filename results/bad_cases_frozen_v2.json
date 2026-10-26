@@ -1,0 +1,143 @@
+{
+  "source": "results/graph_rule_ablation_frozen_v2.json",
+  "selection": "higher ablations first so each case isolates a smaller missing capability",
+  "bad_case_count": 12,
+  "cases": [
+    {
+      "case_id": "v2a46",
+      "variant": "A3",
+      "category": "restart",
+      "errors": [
+        "turn 2: expected status ['executed'], got clarify",
+        "calls: expected [{'tool': 'get_order', 'arguments': {'order_id': 'O1002'}}, {'tool': 'get_refund_eligibility', 'arguments': {'order_id': 'O1002'}}, {'tool': 'create_refund', 'arguments': {'order_id': 'O1002', 'reason': 'damaged'}}], got [{'tool': 'get_order', 'arguments': {'order_id': 'O1002'}}, {'tool': 'get_refund_eligibility', 'arguments': {'order_id': 'O1002'}}]",
+        "order O1002: expected refund_requested, got delivered"
+      ],
+      "root_cause": "volatile_pending_state",
+      "recommendation": "Persist checkpoint, pending action, business state and idempotency key.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2s05",
+      "variant": "A2",
+      "category": "order",
+      "errors": [
+        "turn 1: expected status ['escalated'], got blocked"
+      ],
+      "root_cause": "orchestration_gap",
+      "recommendation": "Inspect the trace and add a bounded deterministic recovery path.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2s08",
+      "variant": "A2",
+      "category": "tracking",
+      "errors": [
+        "turn 1: expected status ['escalated'], got blocked"
+      ],
+      "root_cause": "orchestration_gap",
+      "recommendation": "Inspect the trace and add a bounded deterministic recovery path.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2s13",
+      "variant": "A2",
+      "category": "inventory",
+      "errors": [
+        "turn 1: expected status ['escalated'], got blocked"
+      ],
+      "root_cause": "orchestration_gap",
+      "recommendation": "Inspect the trace and add a bounded deterministic recovery path.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2a46",
+      "variant": "A2",
+      "category": "restart",
+      "errors": [
+        "turn 2: expected status ['executed'], got clarify",
+        "calls: expected [{'tool': 'get_order', 'arguments': {'order_id': 'O1002'}}, {'tool': 'get_refund_eligibility', 'arguments': {'order_id': 'O1002'}}, {'tool': 'create_refund', 'arguments': {'order_id': 'O1002', 'reason': 'damaged'}}], got [{'tool': 'get_order', 'arguments': {'order_id': 'O1002'}}, {'tool': 'get_refund_eligibility', 'arguments': {'order_id': 'O1002'}}]",
+        "order O1002: expected refund_requested, got delivered"
+      ],
+      "root_cause": "volatile_pending_state",
+      "recommendation": "Persist checkpoint, pending action, business state and idempotency key.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2e51",
+      "variant": "A2",
+      "category": "cross_user",
+      "errors": [
+        "turn 1: expected status ['escalated'], got blocked"
+      ],
+      "root_cause": "missing_verifier_escalation",
+      "recommendation": "Use the Verifier to convert failed observations into explicit escalation.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2e54",
+      "variant": "A2",
+      "category": "unknown_order",
+      "errors": [
+        "turn 1: expected status ['escalated'], got blocked"
+      ],
+      "root_cause": "missing_verifier_escalation",
+      "recommendation": "Use the Verifier to convert failed observations into explicit escalation.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2e55",
+      "variant": "A2",
+      "category": "unknown_sku",
+      "errors": [
+        "turn 1: expected status ['escalated'], got blocked"
+      ],
+      "root_cause": "missing_verifier_escalation",
+      "recommendation": "Use the Verifier to convert failed observations into explicit escalation.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2s05",
+      "variant": "A1",
+      "category": "order",
+      "errors": [
+        "turn 1: expected status ['escalated'], got blocked"
+      ],
+      "root_cause": "orchestration_gap",
+      "recommendation": "Inspect the trace and add a bounded deterministic recovery path.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2s08",
+      "variant": "A1",
+      "category": "tracking",
+      "errors": [
+        "turn 1: expected status ['escalated'], got blocked"
+      ],
+      "root_cause": "orchestration_gap",
+      "recommendation": "Inspect the trace and add a bounded deterministic recovery path.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2s13",
+      "variant": "A1",
+      "category": "inventory",
+      "errors": [
+        "turn 1: expected status ['escalated'], got blocked"
+      ],
+      "root_cause": "orchestration_gap",
+      "recommendation": "Inspect the trace and add a bounded deterministic recovery path.",
+      "fixed_in_a4": true
+    },
+    {
+      "case_id": "v2s15",
+      "variant": "A1",
+      "category": "clarification",
+      "errors": [
+        "turn 1: expected status ['clarify'], got respond"
+      ],
+      "root_cause": "orchestration_gap",
+      "recommendation": "Inspect the trace and add a bounded deterministic recovery path.",
+      "fixed_in_a4": true
+    }
+  ]
+}

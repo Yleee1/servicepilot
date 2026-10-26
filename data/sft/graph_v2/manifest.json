@@ -1,0 +1,33 @@
+{
+  "seed": 42,
+  "total": 340,
+  "splits": {
+    "train": {
+      "count": 255,
+      "sha256": "e684979912498d98130bff18b5953f22f99469af4ee37ca778eca7de5f214b97"
+    },
+    "valid": {
+      "count": 42,
+      "sha256": "92cefed6cff43774a4204e0c3738bc07e73d68541eb0bf177cdad5b0c7952cf9"
+    },
+    "test": {
+      "count": 43,
+      "sha256": "58709df30849165e55440027f70a0774455b537a1c60c898b930ff5d9d7936af"
+    }
+  },
+  "role_distribution": {
+    "inventory": 40,
+    "order": 60,
+    "refund": 60,
+    "supervisor": 120,
+    "verifier": 60
+  },
+  "split_input_intersections": {
+    "train_valid": 0,
+    "train_test": 0,
+    "valid_test": 0
+  },
+  "frozen_eval_message_overlap": 0,
+  "overlap_examples": [],
+  "note": "Synthetic training identifiers O1100+/O2100+ are disjoint from V2 eval identifiers."
+}

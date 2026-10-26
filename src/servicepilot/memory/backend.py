@@ -1,0 +1,23 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Protocol
+
+from .schemas import MemoryHit, MemoryPatch, MemoryQuery, MemoryRecord, MemoryVersion
+
+
+@dataclass(frozen=True)
+class AddResult:
+    record: MemoryRecord
+    decision: str
+    merged_into: str | None = None
+
+
+class MemoryBackend(Protocol):
+    def add(self, record: MemoryRecord, *, reason: str = "") -> AddResult: ...
+    def search(self, query: MemoryQuery) -> list[MemoryHit]: ...
+    def update(self, memory_id: str, patch: MemoryPatch, *, reason: str = "") -> MemoryRecord: ...
+    def invalidate(self, memory_id: str, reason: str) -> None: ...
+    def get(self, memory_id: str) -> MemoryRecord | None: ...
+    def get_history(self, memory_id: str) -> list[MemoryVersion]: ...
+    def find_candidates(self, record: MemoryRecord) -> list[MemoryRecord]: ...

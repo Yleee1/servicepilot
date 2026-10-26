@@ -1,0 +1,40 @@
+{
+  "file": "graph_frozen_v2.jsonl",
+  "sha256": "b4e1b1924470b7c9e9b8fc31130833876fdadd00a5a01adb490b22873c196a36",
+  "case_count": 61,
+  "category_distribution": {
+    "advisory": 1,
+    "already_refunded": 1,
+    "approval": 2,
+    "cancel": 1,
+    "clarification": 1,
+    "compound": 16,
+    "compound_refund": 4,
+    "cross_user": 1,
+    "duplicate_confirmation": 1,
+    "handoff_limit": 1,
+    "inventory": 5,
+    "missing_order": 1,
+    "missing_reason": 1,
+    "missing_sku": 1,
+    "negative_instruction": 1,
+    "no_pending": 1,
+    "order": 6,
+    "out_of_scope": 2,
+    "prompt_injection": 1,
+    "refund_advice": 2,
+    "restart": 1,
+    "stale_request": 1,
+    "stale_ttl": 1,
+    "tracking": 5,
+    "transient_tool_error": 1,
+    "unknown_order": 1,
+    "unknown_sku": 1
+  },
+  "review_status": "independent_second_review_completed_user_attested",
+  "review_attestation_date": "2026-10-11",
+  "review_note": "Completion was attested by the project owner; reviewer identity and private review notes are not stored in the repository.",
+  "limitations": [
+    "Rule-based orchestration benchmark; it does not establish LLM generalization."
+  ]
+}

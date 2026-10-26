@@ -1,0 +1,179 @@
+{
+  "seed": 73,
+  "records_per_task": 96,
+  "tasks": {
+    "router": {
+      "splits": {
+        "train": {
+          "count": 72,
+          "sha256": "3d127b7c7109307450cd2abe1a89ac803ed4b7eefa45cee2359b8b578b968ee9"
+        },
+        "valid": {
+          "count": 12,
+          "sha256": "34e6f9ac01b69b24219f4c064d7f622c9b40c45f37f50166541194b3f0177449"
+        },
+        "test": {
+          "count": 12,
+          "sha256": "eb0a323d5ed34867a050a1c19f3f8f2b9c352d21e486918c47c72f0dcc043d1d"
+        }
+      },
+      "split_input_intersections": {
+        "train_valid": 0,
+        "train_test": 0,
+        "valid_test": 0
+      },
+      "label_distribution": {
+        "{\"intent\": \"compound\", \"expert\": [\"order\", \"inventory\"]}": 16,
+        "{\"intent\": \"inventory\", \"expert\": [\"inventory\"]}": 16,
+        "{\"intent\": \"order_status\", \"expert\": [\"order\"]}": 16,
+        "{\"intent\": \"out_of_scope\", \"expert\": []}": 16,
+        "{\"intent\": \"refund\", \"expert\": [\"order\", \"refund\"]}": 16,
+        "{\"intent\": \"tracking\", \"expert\": [\"order\"]}": 16
+      }
+    },
+    "argument": {
+      "splits": {
+        "train": {
+          "count": 72,
+          "sha256": "78a1f87e2d854cf4a5d02fc06325829d672878627a46494c9166e444f9c32618"
+        },
+        "valid": {
+          "count": 12,
+          "sha256": "e2fc1c36bfe05954b9ca6ed28fb100f8559dd38d6766713c5dfff92f636a198b"
+        },
+        "test": {
+          "count": 12,
+          "sha256": "93e5c2f11e641cfc52690797eafe5fc29e3d644d5b1aafc36ecf17335dc43aae"
+        }
+      },
+      "split_input_intersections": {
+        "train_valid": 0,
+        "train_test": 0,
+        "valid_test": 0
+      },
+      "label_distribution": {
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-002\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-008\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-014\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-020\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-026\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-032\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-038\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-044\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-050\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-056\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-062\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-068\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-074\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-080\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-086\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"check_inventory\", \"arguments\": {\"sku_id\": \"ARG-092\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6000\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6006\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6012\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6018\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6024\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6030\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6036\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6042\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6048\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6054\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6060\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6066\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6072\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6078\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6084\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_order\", \"arguments\": {\"order_id\": \"A6090\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6005\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6011\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6017\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6023\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6029\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6035\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6041\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6047\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6053\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6059\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6065\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6071\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6077\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6083\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6089\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"get_refund_eligibility\", \"arguments\": {\"order_id\": \"A6095\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6001\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6007\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6013\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6019\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6025\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6031\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6037\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6043\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6049\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6055\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6061\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6067\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6073\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6079\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6085\"}}": 1,
+        "{\"action\": \"call\", \"tool\": \"track_package\", \"arguments\": {\"order_id\": \"A6091\"}}": 1,
+        "{\"action\": \"clarify\", \"tool\": null, \"arguments\": {}}": 32
+      }
+    },
+    "memory_classifier": {
+      "splits": {
+        "train": {
+          "count": 72,
+          "sha256": "700ce6b94e474e33cd999e5f14bdbab304d0f6bace4478cb845a5c9364ad0bd3"
+        },
+        "valid": {
+          "count": 12,
+          "sha256": "7ca6c452a930dca56ce1c5a9a1bba007d3c8c42e7549d52d9a392b38a5297cd9"
+        },
+        "test": {
+          "count": 12,
+          "sha256": "98dd17fd8bb0a08bf157ba4994d9f3d01034524bfa9bf482afaa5bfdd994d422"
+        }
+      },
+      "split_input_intersections": {
+        "train_valid": 0,
+        "train_test": 0,
+        "valid_test": 0
+      },
+      "label_distribution": {
+        "{\"write\": false, \"memory_type\": null, \"scope_type\": null}": 48,
+        "{\"write\": true, \"memory_type\": \"procedural\", \"scope_type\": \"organization\"}": 16,
+        "{\"write\": true, \"memory_type\": \"semantic\", \"scope_type\": \"project\"}": 16,
+        "{\"write\": true, \"memory_type\": \"semantic\", \"scope_type\": \"user\"}": 16
+      }
+    },
+    "conflict_classifier": {
+      "splits": {
+        "train": {
+          "count": 72,
+          "sha256": "e057aa5f64bb7d8be0b8e8891793531ef380b2a881f025e4fd778242100397de"
+        },
+        "valid": {
+          "count": 12,
+          "sha256": "db330aa6a5663c69c95b0e4d788e0542b72d57e28403f0ce587bffbf4d3bd2e4"
+        },
+        "test": {
+          "count": 12,
+          "sha256": "76771bae87eb300e112a45fcdca7b9e93ad765d907f82468aa23f9b375a15d02"
+        }
+      },
+      "split_input_intersections": {
+        "train_valid": 0,
+        "train_test": 0,
+        "valid_test": 0
+      },
+      "label_distribution": {
+        "{\"decision\": \"duplicate\"}": 16,
+        "{\"decision\": \"low_authority_conflict\"}": 16,
+        "{\"decision\": \"new\"}": 16,
+        "{\"decision\": \"scope_override\"}": 16,
+        "{\"decision\": \"temporal_update\"}": 16,
+        "{\"decision\": \"true_conflict\"}": 16
+      }
+    }
+  }
+}

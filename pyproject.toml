@@ -7,10 +7,16 @@ name = "servicepilot"
 version = "0.1.0"
 description = "Executable and evaluated customer-service tool-calling agent"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+  "langgraph>=1.0,<2",
+  "langgraph-checkpoint-sqlite>=3.0,<4",
+]
 
 [project.optional-dependencies]
 train-mlx = ["mlx-lm>=0.31,<0.32"]
+memory = ["mem0ai>=1,<2"]
+observability = ["langfuse>=4,<5"]
+evo = ["evo-harness @ git+https://github.com/A-EVO-Lab/a-evolve.git@3c7c7b8c62a3f07da1d4407aa03f0ca079954bcf"]
 dev = ["pytest>=8", "ruff>=0.6"]
 
 [project.scripts]
@@ -19,6 +25,16 @@ servicepilot-generate-data = "servicepilot.data_generation:main"
 servicepilot-replay = "servicepilot.replay_cli:main"
 servicepilot-session-eval = "servicepilot.session_eval_cli:main"
 servicepilot-demo = "servicepilot.web_demo:main"
+servicepilot-graph-eval = "servicepilot.graph_eval_cli:main"
+servicepilot-restart-probe = "servicepilot.restart_probe:main"
+servicepilot-graph-data = "servicepilot.graph_data_v2:main"
+servicepilot-graph-sft-data = "servicepilot.graph_sft_v2:main"
+servicepilot-memory-eval = "servicepilot.memory_eval_cli:main"
+servicepilot-narrow-sft-data = "servicepilot.narrow_sft_v3:main"
+servicepilot-narrow-eval = "servicepilot.narrow_eval_v3:main"
+servicepilot-memory-ablation = "servicepilot.memory_ablation_v3:main"
+servicepilot-evo-export = "servicepilot.evo_harness_bridge:main"
+servicepilot-evo-m7 = "servicepilot.evo_m7:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

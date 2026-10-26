@@ -1,0 +1,6 @@
+{
+  "cycle": 2,
+  "hypothesis": "失败类型=irrelevant_negative_transfer",
+  "retrieval_filter": "character_bigram_overlap",
+  "minimum_overlap": 0.3
+}

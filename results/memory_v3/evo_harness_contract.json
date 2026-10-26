@@ -1,0 +1,19 @@
+{
+  "contract": "official evo-harness AgentWorkspace/Observer",
+  "source_repository": "https://github.com/A-EVO-Lab/a-evolve",
+  "source_ref": "release/evo-harness",
+  "source_commit": "3c7c7b8c62a3f07da1d4407aa03f0ca079954bcf",
+  "input": "results/memory_v3/matrix_frozen.json",
+  "pipeline": "M7_context_to_harness",
+  "group": "M7",
+  "observation_count": 14,
+  "observer_batch_sha256": "c83c0a3ae6e4bb22a912160db486532d45aadd257aeb89ffa975689cd2e8d22c",
+  "contract_smoke_passed": true,
+  "evolution_executed": true,
+  "cycles_completed": 2,
+  "accepted_cycle": 2,
+  "accepted_minimum_overlap": 0.075,
+  "compiler": "local Qwen3-1.7B-4bit via MLX",
+  "frozen_used_for_selection": false,
+  "note": "Custom ServicePilot context-to-harness pipeline built on the official AgentWorkspace/Observer contract; it is not an upstream benchmark pipeline."
+}

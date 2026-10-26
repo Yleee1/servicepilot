@@ -25,7 +25,7 @@ def load_dotenv(path: str | Path) -> None:
 def extract_json(content: str) -> dict:
     cleaned = content.strip()
     if cleaned.startswith("```"):
-        cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", cleaned, flags=re.I)
+        cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", cleaned, flags=re.IGNORECASE)
     try:
         value = json.loads(cleaned)
     except json.JSONDecodeError:
@@ -34,7 +34,7 @@ def extract_json(content: str) -> dict:
             raise ValueError("model response contains no JSON object")
         value = json.loads(cleaned[start : end + 1])
     if not isinstance(value, dict):
-        raise ValueError("model response JSON must be an object")
+        raise TypeError("model response JSON must be an object")
     return value
 
 
@@ -55,7 +55,7 @@ class OpenAICompatibleJSONClient:
         }
 
     @classmethod
-    def from_env(cls, env_path: str | Path) -> "OpenAICompatibleJSONClient":
+    def from_env(cls, env_path: str | Path) -> OpenAICompatibleJSONClient:
         load_dotenv(env_path)
         return cls(
             os.environ.get("DEEPSEEK_API_KEY", ""),

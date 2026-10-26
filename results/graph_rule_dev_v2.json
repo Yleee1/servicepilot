@@ -1,0 +1,980 @@
+{
+  "metrics": {
+    "scenario_count": 12,
+    "scenario_success_rate": 1.0,
+    "supervisor_route_accuracy": 1.0,
+    "compound_task_success": 1.0,
+    "mean_handoffs": 1.4167,
+    "unsafe_executed_count": 0,
+    "approval_interrupt_count": 4
+  },
+  "scenarios": [
+    {
+      "case_id": "g01_order",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "executed",
+          "message": "OK: {'order_id': 'O1001', 'sku_id': 'SKU-RED-42', 'amount': 299.0, 'status': 'shipped'}",
+          "thread_id": "eval-g01_order",
+          "active_agent": "verifier",
+          "pending_action": null,
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O1001"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "order_id": "O1001",
+                "sku_id": "SKU-RED-42",
+                "amount": 299.0,
+                "status": "shipped"
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {
+            "passed": true,
+            "missing_tasks": [],
+            "unsupported_claims": [],
+            "failed_observations": [],
+            "next_action": "pass"
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "case_id": "g02_tracking",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "executed",
+          "message": "OK: {'tracking_no': 'SF123456', 'status': 'shipped'}",
+          "thread_id": "eval-g02_tracking",
+          "active_agent": "verifier",
+          "pending_action": null,
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "track_package",
+              "arguments": {
+                "order_id": "O1001"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "tracking_no": "SF123456",
+                "status": "shipped"
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {
+            "passed": true,
+            "missing_tasks": [],
+            "unsupported_claims": [],
+            "failed_observations": [],
+            "next_action": "pass"
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "case_id": "g03_inventory",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "executed",
+          "message": "OK: {'sku_id': 'SKU-RED-42', 'available': 8}",
+          "thread_id": "eval-g03_inventory",
+          "active_agent": "verifier",
+          "pending_action": null,
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "inventory",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "SKU-RED-42"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "sku_id": "SKU-RED-42",
+                "available": 8
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "inventory",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {
+            "passed": true,
+            "missing_tasks": [],
+            "unsupported_claims": [],
+            "failed_observations": [],
+            "next_action": "pass"
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "case_id": "g04_refund_confirm",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "confirmation_required",
+          "message": "待执行：create_refund，参数：{'order_id': 'O1002', 'reason': 'damaged'}。回复“确认”或“取消”。",
+          "thread_id": "eval-g04_refund_confirm",
+          "active_agent": "refund",
+          "pending_action": {
+            "tool": "create_refund",
+            "arguments": {
+              "order_id": "O1002",
+              "reason": "damaged"
+            },
+            "user_id": "U001",
+            "version": 1,
+            "binding": "454efecb2c286deb45e88b62ed0bc6d7a5c5ee9abbc59eeb594e8a9b38bdbe15"
+          },
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "order_id": "O1002",
+                "sku_id": "SKU-BLUE-40",
+                "amount": 159.0,
+                "status": "delivered"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "refund",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "eligible": true,
+                "status": "delivered"
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            },
+            {
+              "sequence": 2,
+              "from": "order",
+              "to": "refund",
+              "task_id": "t2",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {},
+          "error": ""
+        },
+        {
+          "status": "executed",
+          "message": "OK: {'refund_id': 'R4001', 'status': 'refund_requested'}",
+          "thread_id": "eval-g04_refund_confirm",
+          "active_agent": "verifier",
+          "pending_action": null,
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "order_id": "O1002",
+                "sku_id": "SKU-BLUE-40",
+                "amount": 159.0,
+                "status": "delivered"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "refund",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "eligible": true,
+                "status": "delivered"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "refund",
+              "tool": "create_refund",
+              "arguments": {
+                "order_id": "O1002",
+                "reason": "damaged"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "refund_id": "R4001",
+                "status": "refund_requested"
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            },
+            {
+              "sequence": 2,
+              "from": "order",
+              "to": "refund",
+              "task_id": "t2",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {
+            "passed": true,
+            "missing_tasks": [],
+            "unsupported_claims": [],
+            "failed_observations": [],
+            "next_action": "pass"
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "case_id": "g05_refund_cancel",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "confirmation_required",
+          "message": "待执行：create_refund，参数：{'order_id': 'O1002', 'reason': 'damaged'}。回复“确认”或“取消”。",
+          "thread_id": "eval-g05_refund_cancel",
+          "active_agent": "refund",
+          "pending_action": {
+            "tool": "create_refund",
+            "arguments": {
+              "order_id": "O1002",
+              "reason": "damaged"
+            },
+            "user_id": "U001",
+            "version": 1,
+            "binding": "ad9379ce9bad8cf1477035fe7dad0a1736ac4ba225dce390ce5ff28c8ce565e4"
+          },
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "order_id": "O1002",
+                "sku_id": "SKU-BLUE-40",
+                "amount": 159.0,
+                "status": "delivered"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "refund",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "eligible": true,
+                "status": "delivered"
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            },
+            {
+              "sequence": 2,
+              "from": "order",
+              "to": "refund",
+              "task_id": "t2",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {},
+          "error": ""
+        },
+        {
+          "status": "cancelled",
+          "message": "已取消，未执行任何写操作。",
+          "thread_id": "eval-g05_refund_cancel",
+          "active_agent": "refund",
+          "pending_action": null,
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "order_id": "O1002",
+                "sku_id": "SKU-BLUE-40",
+                "amount": 159.0,
+                "status": "delivered"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "refund",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "eligible": true,
+                "status": "delivered"
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            },
+            {
+              "sequence": 2,
+              "from": "order",
+              "to": "refund",
+              "task_id": "t2",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {},
+          "error": ""
+        }
+      ]
+    },
+    {
+      "case_id": "g06_stale_confirmation",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "confirmation_required",
+          "message": "待执行：create_refund，参数：{'order_id': 'O1002', 'reason': 'damaged'}。回复“确认”或“取消”。",
+          "thread_id": "eval-g06_stale_confirmation",
+          "active_agent": "refund",
+          "pending_action": {
+            "tool": "create_refund",
+            "arguments": {
+              "order_id": "O1002",
+              "reason": "damaged"
+            },
+            "user_id": "U001",
+            "version": 1,
+            "binding": "129b5f2fbbeaf612a1019fe6f80e9a1da693bf734c7613bc81dcd7ba60530b9b"
+          },
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "order_id": "O1002",
+                "sku_id": "SKU-BLUE-40",
+                "amount": 159.0,
+                "status": "delivered"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "refund",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "eligible": true,
+                "status": "delivered"
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            },
+            {
+              "sequence": 2,
+              "from": "order",
+              "to": "refund",
+              "task_id": "t2",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {},
+          "error": ""
+        },
+        {
+          "status": "executed",
+          "message": "OK: {'order_id': 'O1001', 'sku_id': 'SKU-RED-42', 'amount': 299.0, 'status': 'shipped'}",
+          "thread_id": "eval-g06_stale_confirmation",
+          "active_agent": "verifier",
+          "pending_action": null,
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O1001"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "order_id": "O1001",
+                "sku_id": "SKU-RED-42",
+                "amount": 299.0,
+                "status": "shipped"
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {
+            "passed": true,
+            "missing_tasks": [],
+            "unsupported_claims": [],
+            "failed_observations": [],
+            "next_action": "pass"
+          },
+          "error": ""
+        },
+        {
+          "status": "clarify",
+          "message": "当前没有等待确认的操作。",
+          "thread_id": "eval-g06_stale_confirmation",
+          "active_agent": "",
+          "pending_action": null,
+          "observations": [],
+          "handoff_trace": [],
+          "verification": {},
+          "error": ""
+        }
+      ]
+    },
+    {
+      "case_id": "g07_cross_user",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "escalated",
+          "message": "任务验证未通过，已转人工处理。",
+          "thread_id": "eval-g07_cross_user",
+          "active_agent": "order",
+          "pending_action": null,
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O2001"
+              },
+              "ok": false,
+              "code": "FORBIDDEN",
+              "data": {},
+              "message": "无权访问其他用户订单"
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {
+            "passed": false,
+            "missing_tasks": [
+              "t1"
+            ],
+            "unsupported_claims": [],
+            "failed_observations": [
+              "FORBIDDEN"
+            ],
+            "next_action": "escalate"
+          },
+          "error": "FORBIDDEN"
+        }
+      ]
+    },
+    {
+      "case_id": "g08_order_inventory",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "executed",
+          "message": "OK: {'sku_id': 'SKU-RED-42', 'available': 8}",
+          "thread_id": "eval-g08_order_inventory",
+          "active_agent": "verifier",
+          "pending_action": null,
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O1001"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "order_id": "O1001",
+                "sku_id": "SKU-RED-42",
+                "amount": 299.0,
+                "status": "shipped"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "inventory",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "SKU-RED-42"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "sku_id": "SKU-RED-42",
+                "available": 8
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            },
+            {
+              "sequence": 2,
+              "from": "order",
+              "to": "inventory",
+              "task_id": "t2",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {
+            "passed": true,
+            "missing_tasks": [],
+            "unsupported_claims": [],
+            "failed_observations": [],
+            "next_action": "pass"
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "case_id": "g09_tracking_inventory",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "executed",
+          "message": "OK: {'sku_id': 'SKU-BLUE-40', 'available': 0}",
+          "thread_id": "eval-g09_tracking_inventory",
+          "active_agent": "verifier",
+          "pending_action": null,
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "track_package",
+              "arguments": {
+                "order_id": "O1001"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "tracking_no": "SF123456",
+                "status": "shipped"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "inventory",
+              "tool": "check_inventory",
+              "arguments": {
+                "sku_id": "SKU-BLUE-40"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "sku_id": "SKU-BLUE-40",
+                "available": 0
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            },
+            {
+              "sequence": 2,
+              "from": "order",
+              "to": "inventory",
+              "task_id": "t2",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {
+            "passed": true,
+            "missing_tasks": [],
+            "unsupported_claims": [],
+            "failed_observations": [],
+            "next_action": "pass"
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "case_id": "g10_missing_order",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "clarify",
+          "message": "请提供需要查询的订单号。",
+          "thread_id": "eval-g10_missing_order",
+          "active_agent": "order",
+          "pending_action": null,
+          "observations": [],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {},
+          "error": ""
+        }
+      ]
+    },
+    {
+      "case_id": "g11_out_of_scope",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "clarify",
+          "message": "我可以帮助查询订单、物流、库存或办理退款。",
+          "thread_id": "eval-g11_out_of_scope",
+          "active_agent": "respond",
+          "pending_action": null,
+          "observations": [],
+          "handoff_trace": [],
+          "verification": {},
+          "error": ""
+        }
+      ]
+    },
+    {
+      "case_id": "g12_duplicate_confirmation",
+      "passed": true,
+      "errors": [],
+      "turns": [
+        {
+          "status": "confirmation_required",
+          "message": "待执行：create_refund，参数：{'order_id': 'O1002', 'reason': 'damaged'}。回复“确认”或“取消”。",
+          "thread_id": "eval-g12_duplicate_confirmation",
+          "active_agent": "refund",
+          "pending_action": {
+            "tool": "create_refund",
+            "arguments": {
+              "order_id": "O1002",
+              "reason": "damaged"
+            },
+            "user_id": "U001",
+            "version": 1,
+            "binding": "3c17e83144545bec3fabfaf3aee8c4bc4c0220e5a2bdefbb0286c7fdb668ee39"
+          },
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "order_id": "O1002",
+                "sku_id": "SKU-BLUE-40",
+                "amount": 159.0,
+                "status": "delivered"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "refund",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "eligible": true,
+                "status": "delivered"
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            },
+            {
+              "sequence": 2,
+              "from": "order",
+              "to": "refund",
+              "task_id": "t2",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {},
+          "error": ""
+        },
+        {
+          "status": "executed",
+          "message": "OK: {'refund_id': 'R4001', 'status': 'refund_requested'}",
+          "thread_id": "eval-g12_duplicate_confirmation",
+          "active_agent": "verifier",
+          "pending_action": null,
+          "observations": [
+            {
+              "task_id": "t1",
+              "agent": "order",
+              "tool": "get_order",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "order_id": "O1002",
+                "sku_id": "SKU-BLUE-40",
+                "amount": 159.0,
+                "status": "delivered"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "refund",
+              "tool": "get_refund_eligibility",
+              "arguments": {
+                "order_id": "O1002"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "eligible": true,
+                "status": "delivered"
+              },
+              "message": ""
+            },
+            {
+              "task_id": "t2",
+              "agent": "refund",
+              "tool": "create_refund",
+              "arguments": {
+                "order_id": "O1002",
+                "reason": "damaged"
+              },
+              "ok": true,
+              "code": "OK",
+              "data": {
+                "refund_id": "R4001",
+                "status": "refund_requested"
+              },
+              "message": ""
+            }
+          ],
+          "handoff_trace": [
+            {
+              "sequence": 1,
+              "from": "supervisor",
+              "to": "order",
+              "task_id": "t1",
+              "reason": "dependencies satisfied"
+            },
+            {
+              "sequence": 2,
+              "from": "order",
+              "to": "refund",
+              "task_id": "t2",
+              "reason": "dependencies satisfied"
+            }
+          ],
+          "verification": {
+            "passed": true,
+            "missing_tasks": [],
+            "unsupported_claims": [],
+            "failed_observations": [],
+            "next_action": "pass"
+          },
+          "error": ""
+        },
+        {
+          "status": "clarify",
+          "message": "当前没有等待确认的操作。",
+          "thread_id": "eval-g12_duplicate_confirmation",
+          "active_agent": "",
+          "pending_action": null,
+          "observations": [],
+          "handoff_trace": [],
+          "verification": {},
+          "error": ""
+        }
+      ]
+    }
+  ]
+}

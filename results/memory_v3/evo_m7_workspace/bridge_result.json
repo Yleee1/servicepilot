@@ -1,0 +1,12 @@
+{
+  "contract": "official evo-harness AgentWorkspace/Observer",
+  "group": "M7",
+  "observation_count": 14,
+  "batch_path": "results/memory_v3/evo_m7_workspace/evolution/observations/batch_0009.jsonl",
+  "workspace": "results/memory_v3/evo_m7_workspace",
+  "evolution_executed": true,
+  "pipeline": "M7_context_to_harness",
+  "cycles_completed": 2,
+  "accepted_cycle": 2,
+  "frozen_used_for_selection": false
+}

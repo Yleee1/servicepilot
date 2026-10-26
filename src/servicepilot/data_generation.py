@@ -8,7 +8,6 @@ from pathlib import Path
 
 from .model_caller import SYSTEM_PROMPT
 
-
 ORDER_IDS = [f"O{number}" for number in range(1101, 1191)]
 SKUS = ["SKU-RED-42", "SKU-BLUE-40", "SKU-GREEN-38", "SKU-BLACK-XL"]
 REASONS = {

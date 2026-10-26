@@ -1,7 +1,7 @@
 import unittest
 
 from servicepilot.baseline import RuleBasedToolCaller
-from servicepilot.web_demo import DemoState, PAGE
+from servicepilot.web_demo import PAGE, DemoState
 
 
 class WebDemoTests(unittest.TestCase):

@@ -1,0 +1,72 @@
+{
+  "suite": "memory_v3_governance_eval",
+  "scope": "deterministic memory governance; not LLM end-to-end scenario success",
+  "case_count": 12,
+  "scenario_success_rate": 1.0,
+  "cross_user_leakage_count": 0,
+  "operational_state_write_count": 0,
+  "unsafe_execution_count_in_suite": 0,
+  "failed_case_ids": [],
+  "records": [
+    {
+      "case_id": "preference_recall",
+      "passed": true,
+      "detail": "stable user preference is recalled"
+    },
+    {
+      "case_id": "paraphrase_duplicate",
+      "passed": true,
+      "detail": "duplicate_merged"
+    },
+    {
+      "case_id": "temporal_update",
+      "passed": true,
+      "detail": "old version expired"
+    },
+    {
+      "case_id": "true_conflict",
+      "passed": true,
+      "detail": "conflict withheld from context"
+    },
+    {
+      "case_id": "project_scope_override",
+      "passed": true,
+      "detail": "project override ranked first"
+    },
+    {
+      "case_id": "cross_user_acl",
+      "passed": true,
+      "detail": "ACL applied before ranking"
+    },
+    {
+      "case_id": "deletion",
+      "passed": true,
+      "detail": "deleted but auditable"
+    },
+    {
+      "case_id": "low_authority_conflict",
+      "passed": true,
+      "detail": "rejected_low_authority"
+    },
+    {
+      "case_id": "operational_state_block",
+      "passed": true,
+      "detail": "operational state belongs in the business database/checkpoint"
+    },
+    {
+      "case_id": "memory_injection_block",
+      "passed": true,
+      "detail": "instruction-like memory content is forbidden"
+    },
+    {
+      "case_id": "concurrent_writes",
+      "passed": true,
+      "detail": "serialized duplicate merge"
+    },
+    {
+      "case_id": "restart_persistence",
+      "passed": true,
+      "detail": "memory persists without pending/confirmation state"
+    }
+  ]
+}

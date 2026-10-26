@@ -1,0 +1,609 @@
+{
+  "pipeline": "M7_context_to_harness",
+  "official_evo_harness_commit": "3c7c7b8c62a3f07da1d4407aa03f0ca079954bcf",
+  "evolution_executed": true,
+  "cycles_completed": 2,
+  "accepted_cycle": 2,
+  "baseline": {
+    "dev": {
+      "case_count": 14,
+      "scenario_success": 0.9285714285714286,
+      "mean_latency_ms": 0.2036162352721606,
+      "failed_case_ids": [
+        "dev_12_irrelevant_negative_transfer"
+      ],
+      "records": [
+        {
+          "case_id": "dev_01_preference_recall",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.14941697008907795
+        },
+        {
+          "case_id": "dev_02_project_override",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.327541958540678
+        },
+        {
+          "case_id": "dev_03_duplicate_merge",
+          "passed": true,
+          "check_count": 2,
+          "latency_ms": 0.290541909635067
+        },
+        {
+          "case_id": "dev_04_temporal_update",
+          "passed": true,
+          "check_count": 3,
+          "latency_ms": 0.4365420900285244
+        },
+        {
+          "case_id": "dev_05_true_conflict",
+          "passed": true,
+          "check_count": 3,
+          "latency_ms": 0.3552080597728491
+        },
+        {
+          "case_id": "dev_06_cross_user_acl",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.15008309856057167
+        },
+        {
+          "case_id": "dev_07_deletion",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.25858310982584953
+        },
+        {
+          "case_id": "dev_08_operational_state_block",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.010167015716433525
+        },
+        {
+          "case_id": "dev_09_injection_block",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.010417075827717781
+        },
+        {
+          "case_id": "dev_10_low_authority_conflict",
+          "passed": true,
+          "check_count": 3,
+          "latency_ms": 0.2582920715212822
+        },
+        {
+          "case_id": "dev_11_procedural_experience",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.18345890566706657
+        },
+        {
+          "case_id": "dev_12_irrelevant_negative_transfer",
+          "passed": false,
+          "check_count": 1,
+          "latency_ms": 0.14941697008907795
+        },
+        {
+          "case_id": "dev_13_expired_memory",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.14050002209842205
+        },
+        {
+          "case_id": "dev_14_task_scope_acl",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.13045803643763065
+        }
+      ]
+    },
+    "heldout": {
+      "case_count": 14,
+      "scenario_success": 0.9285714285714286,
+      "mean_latency_ms": 0.1938779272937349,
+      "failed_case_ids": [
+        "heldout_12_irrelevant_negative_transfer"
+      ],
+      "records": [
+        {
+          "case_id": "heldout_01_preference_recall",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.13999990187585354
+        },
+        {
+          "case_id": "heldout_02_project_override",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.26316684670746326
+        },
+        {
+          "case_id": "heldout_03_duplicate_merge",
+          "passed": true,
+          "check_count": 2,
+          "latency_ms": 0.3409590572118759
+        },
+        {
+          "case_id": "heldout_04_temporal_update",
+          "passed": true,
+          "check_count": 3,
+          "latency_ms": 0.37416606210172176
+        },
+        {
+          "case_id": "heldout_05_true_conflict",
+          "passed": true,
+          "check_count": 3,
+          "latency_ms": 0.36325003020465374
+        },
+        {
+          "case_id": "heldout_06_cross_user_acl",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.12291711755096912
+        },
+        {
+          "case_id": "heldout_07_deletion",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.2454579807817936
+        },
+        {
+          "case_id": "heldout_08_operational_state_block",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.01016608439385891
+        },
+        {
+          "case_id": "heldout_09_injection_block",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.010832911357283592
+        },
+        {
+          "case_id": "heldout_10_low_authority_conflict",
+          "passed": true,
+          "check_count": 3,
+          "latency_ms": 0.253541162237525
+        },
+        {
+          "case_id": "heldout_11_procedural_experience",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.19654189236462116
+        },
+        {
+          "case_id": "heldout_12_irrelevant_negative_transfer",
+          "passed": false,
+          "check_count": 1,
+          "latency_ms": 0.13837497681379318
+        },
+        {
+          "case_id": "heldout_13_expired_memory",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.12508290819823742
+        },
+        {
+          "case_id": "heldout_14_task_scope_acl",
+          "passed": true,
+          "check_count": 1,
+          "latency_ms": 0.12983405031263828
+        }
+      ]
+    }
+  },
+  "attempts": [
+    {
+      "cycle": 1,
+      "candidate_hash": "9676153e942bc3afd4c5d08075dd50cb1758e900c5e0d503f6046b5fced46b09",
+      "candidate": {
+        "hypothesis": "失败类型=irrelevant_negative_transfer",
+        "guidance": "过滤零相关召回，保留措辞不同但共享关键短语的记忆，确保 minimum_overlap 在 0.01 到 0.5 之间。",
+        "retrieval_filter": "character_bigram_overlap",
+        "minimum_overlap": 0.3
+      },
+      "dev_result": {
+        "case_count": 14,
+        "scenario_success": 0.7142857142857143,
+        "mean_latency_ms": 0.36258611362427473,
+        "failed_case_ids": [
+          "dev_02_project_override",
+          "dev_03_duplicate_merge",
+          "dev_04_temporal_update",
+          "dev_10_low_authority_conflict"
+        ],
+        "records": [
+          {
+            "case_id": "dev_01_preference_recall",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 1.5129582025110722
+          },
+          {
+            "case_id": "dev_02_project_override",
+            "passed": false,
+            "check_count": 1,
+            "latency_ms": 0.4172080662101507
+          },
+          {
+            "case_id": "dev_03_duplicate_merge",
+            "passed": false,
+            "check_count": 2,
+            "latency_ms": 0.419040909036994
+          },
+          {
+            "case_id": "dev_04_temporal_update",
+            "passed": false,
+            "check_count": 3,
+            "latency_ms": 0.5218749865889549
+          },
+          {
+            "case_id": "dev_05_true_conflict",
+            "passed": true,
+            "check_count": 3,
+            "latency_ms": 0.5067919846624136
+          },
+          {
+            "case_id": "dev_06_cross_user_acl",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.1707079354673624
+          },
+          {
+            "case_id": "dev_07_deletion",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.29966700822114944
+          },
+          {
+            "case_id": "dev_08_operational_state_block",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.013167038559913635
+          },
+          {
+            "case_id": "dev_09_injection_block",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.016832957044243813
+          },
+          {
+            "case_id": "dev_10_low_authority_conflict",
+            "passed": false,
+            "check_count": 3,
+            "latency_ms": 0.35158288665115833
+          },
+          {
+            "case_id": "dev_11_procedural_experience",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.2016248181462288
+          },
+          {
+            "case_id": "dev_12_irrelevant_negative_transfer",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.16795797273516655
+          },
+          {
+            "case_id": "dev_13_expired_memory",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.2496249508112669
+          },
+          {
+            "case_id": "dev_14_task_scope_acl",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.22716587409377098
+          }
+        ]
+      },
+      "heldout_result": null,
+      "dev_delta": -0.2142857142857143,
+      "heldout_delta": null,
+      "safety_regressions": [],
+      "decision": "rejected_dev"
+    },
+    {
+      "cycle": 2,
+      "candidate_hash": "319afb017db6e936ad1e5eea11a2075b54758625b688035306f9026f3a9f51fa",
+      "candidate": {
+        "hypothesis": "rejected_dev; dev Gate 自动放宽过严阈值",
+        "guidance": "irrelevant_negative_transfer Dev Gate 发现过严过滤后降低阈值，避免相关记忆假阴性。",
+        "retrieval_filter": "character_bigram_overlap",
+        "minimum_overlap": 0.075
+      },
+      "dev_result": {
+        "case_count": 14,
+        "scenario_success": 1.0,
+        "mean_latency_ms": 0.23531823951218808,
+        "failed_case_ids": [],
+        "records": [
+          {
+            "case_id": "dev_01_preference_recall",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.28404081240296364
+          },
+          {
+            "case_id": "dev_02_project_override",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.33299997448921204
+          },
+          {
+            "case_id": "dev_03_duplicate_merge",
+            "passed": true,
+            "check_count": 2,
+            "latency_ms": 0.3690000157803297
+          },
+          {
+            "case_id": "dev_04_temporal_update",
+            "passed": true,
+            "check_count": 3,
+            "latency_ms": 0.4193750210106373
+          },
+          {
+            "case_id": "dev_05_true_conflict",
+            "passed": true,
+            "check_count": 3,
+            "latency_ms": 0.5120409186929464
+          },
+          {
+            "case_id": "dev_06_cross_user_acl",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.15558302402496338
+          },
+          {
+            "case_id": "dev_07_deletion",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.28187502175569534
+          },
+          {
+            "case_id": "dev_08_operational_state_block",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.012707896530628204
+          },
+          {
+            "case_id": "dev_09_injection_block",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.01329183578491211
+          },
+          {
+            "case_id": "dev_10_low_authority_conflict",
+            "passed": true,
+            "check_count": 3,
+            "latency_ms": 0.33504096791148186
+          },
+          {
+            "case_id": "dev_11_procedural_experience",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.17654197290539742
+          },
+          {
+            "case_id": "dev_12_irrelevant_negative_transfer",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.14537503011524677
+          },
+          {
+            "case_id": "dev_13_expired_memory",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.13124989345669746
+          },
+          {
+            "case_id": "dev_14_task_scope_acl",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.12533296830952168
+          }
+        ]
+      },
+      "heldout_result": {
+        "case_count": 14,
+        "scenario_success": 1.0,
+        "mean_latency_ms": 0.19325302647692816,
+        "failed_case_ids": [],
+        "records": [
+          {
+            "case_id": "heldout_01_preference_recall",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.15045912005007267
+          },
+          {
+            "case_id": "heldout_02_project_override",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.27416693046689034
+          },
+          {
+            "case_id": "heldout_03_duplicate_merge",
+            "passed": true,
+            "check_count": 2,
+            "latency_ms": 0.29212492518126965
+          },
+          {
+            "case_id": "heldout_04_temporal_update",
+            "passed": true,
+            "check_count": 3,
+            "latency_ms": 0.3822499420493841
+          },
+          {
+            "case_id": "heldout_05_true_conflict",
+            "passed": true,
+            "check_count": 3,
+            "latency_ms": 0.36020809784531593
+          },
+          {
+            "case_id": "heldout_06_cross_user_acl",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.12666592374444008
+          },
+          {
+            "case_id": "heldout_07_deletion",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.26404205709695816
+          },
+          {
+            "case_id": "heldout_08_operational_state_block",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.009458046406507492
+          },
+          {
+            "case_id": "heldout_09_injection_block",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.010458054021000862
+          },
+          {
+            "case_id": "heldout_10_low_authority_conflict",
+            "passed": true,
+            "check_count": 3,
+            "latency_ms": 0.26899995282292366
+          },
+          {
+            "case_id": "heldout_11_procedural_experience",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.17154216766357422
+          },
+          {
+            "case_id": "heldout_12_irrelevant_negative_transfer",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.14091702178120613
+          },
+          {
+            "case_id": "heldout_13_expired_memory",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.12383307330310345
+          },
+          {
+            "case_id": "heldout_14_task_scope_acl",
+            "passed": true,
+            "check_count": 1,
+            "latency_ms": 0.13041705824434757
+          }
+        ]
+      },
+      "dev_delta": 0.0714285714285714,
+      "heldout_delta": 0.0714285714285714,
+      "safety_regressions": [],
+      "decision": "accepted"
+    }
+  ],
+  "frozen_result": {
+    "case_count": 14,
+    "scenario_success": 1.0,
+    "mean_latency_ms": 0.2133363824603813,
+    "failed_case_ids": [],
+    "records": [
+      {
+        "case_id": "frozen_01_preference_recall",
+        "passed": true,
+        "check_count": 1,
+        "latency_ms": 0.16491697169840336
+      },
+      {
+        "case_id": "frozen_02_project_override",
+        "passed": true,
+        "check_count": 1,
+        "latency_ms": 0.2842918038368225
+      },
+      {
+        "case_id": "frozen_03_duplicate_merge",
+        "passed": true,
+        "check_count": 2,
+        "latency_ms": 0.3220420330762863
+      },
+      {
+        "case_id": "frozen_04_temporal_update",
+        "passed": true,
+        "check_count": 3,
+        "latency_ms": 0.443875091150403
+      },
+      {
+        "case_id": "frozen_05_true_conflict",
+        "passed": true,
+        "check_count": 3,
+        "latency_ms": 0.3659590147435665
+      },
+      {
+        "case_id": "frozen_06_cross_user_acl",
+        "passed": true,
+        "check_count": 1,
+        "latency_ms": 0.12745801359415054
+      },
+      {
+        "case_id": "frozen_07_deletion",
+        "passed": true,
+        "check_count": 1,
+        "latency_ms": 0.4182080738246441
+      },
+      {
+        "case_id": "frozen_08_operational_state_block",
+        "passed": true,
+        "check_count": 1,
+        "latency_ms": 0.009750016033649445
+      },
+      {
+        "case_id": "frozen_09_injection_block",
+        "passed": true,
+        "check_count": 1,
+        "latency_ms": 0.010458054021000862
+      },
+      {
+        "case_id": "frozen_10_low_authority_conflict",
+        "passed": true,
+        "check_count": 3,
+        "latency_ms": 0.257750041782856
+      },
+      {
+        "case_id": "frozen_11_procedural_experience",
+        "passed": true,
+        "check_count": 1,
+        "latency_ms": 0.17233309336006641
+      },
+      {
+        "case_id": "frozen_12_irrelevant_negative_transfer",
+        "passed": true,
+        "check_count": 1,
+        "latency_ms": 0.14504184946417809
+      },
+      {
+        "case_id": "frozen_13_expired_memory",
+        "passed": true,
+        "check_count": 1,
+        "latency_ms": 0.13208319433033466
+      },
+      {
+        "case_id": "frozen_14_task_scope_acl",
+        "passed": true,
+        "check_count": 1,
+        "latency_ms": 0.13254210352897644
+      }
+    ]
+  },
+  "compiler_usage": {
+    "calls": 2,
+    "prompt_tokens": 431,
+    "completion_tokens": 126,
+    "total_tokens": 557,
+    "api_seconds": 1.5697594170924276
+  },
+  "frozen_used_for_selection": false
+}

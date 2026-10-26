@@ -1,0 +1,20 @@
+{
+  "source_run": "results/memory_v3/matrix_frozen.json",
+  "dataset_sha256": "0944e5b3d38228efc6339830717e574c1e43cc91839cdfc7b513162b5fb14102",
+  "note": "Bad cases are observed failures from M1 Full History unless another group is named.",
+  "cases": [
+    {"case_id":"frozen_02_project_override","root_cause":"no_scope_precedence","group":"M1"},
+    {"case_id":"frozen_03_duplicate_merge","root_cause":"duplicate_accumulation","group":"M1"},
+    {"case_id":"frozen_04_temporal_update","root_cause":"stale_version_remains_visible","group":"M1"},
+    {"case_id":"frozen_05_true_conflict","root_cause":"conflicting_values_injected","group":"M1"},
+    {"case_id":"frozen_06_cross_user_acl","root_cause":"cross_user_leakage","group":"M1"},
+    {"case_id":"frozen_08_operational_state_block","root_cause":"operational_state_persisted","group":"M1"},
+    {"case_id":"frozen_09_injection_block","root_cause":"instruction_text_persisted","group":"M1"},
+    {"case_id":"frozen_10_low_authority_conflict","root_cause":"agent_inference_overrides_user","group":"M1"},
+    {"case_id":"frozen_12_irrelevant_negative_transfer","root_cause":"no_relevance_threshold","group":"M1"},
+    {"case_id":"frozen_13_expired_memory","root_cause":"expired_record_visible","group":"M1"},
+    {"case_id":"frozen_14_task_scope_acl","root_cause":"task_scope_visible_without_context","group":"M1"},
+    {"case_id":"frozen_03_duplicate_merge","root_cause":"mem0_default_has_no_servicepilot_merge_policy","group":"M3"},
+    {"case_id":"frozen_11_procedural_experience","root_cause":"M5_excludes_procedural_memory_by_ablation_design","group":"M5"}
+  ]
+}

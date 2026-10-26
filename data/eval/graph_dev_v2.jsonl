@@ -1,0 +1,12 @@
+{"case_id":"g01_order","user_id":"U001","messages":["查一下订单 O1001"],"expected_statuses":["executed"],"expected_agents":["order"],"expected_tools":["get_order"]}
+{"case_id":"g02_tracking","user_id":"U001","messages":["O1001 的物流到哪了"],"expected_statuses":["executed"],"expected_agents":["order"],"expected_tools":["track_package"]}
+{"case_id":"g03_inventory","user_id":"U001","messages":["查库存 SKU-RED-42"],"expected_statuses":["executed"],"expected_agents":["inventory"],"expected_tools":["check_inventory"]}
+{"case_id":"g04_refund_confirm","user_id":"U001","messages":["O1002 商品坏了，帮我退款","确认"],"expected_statuses":["confirmation_required","executed"],"expected_agents":["order","refund"],"expected_tools":["get_order","get_refund_eligibility","create_refund"]}
+{"case_id":"g05_refund_cancel","user_id":"U001","messages":["O1002 商品坏了，帮我退款","取消"],"expected_statuses":["confirmation_required","cancelled"],"expected_agents":["order","refund"],"expected_tools":["get_order","get_refund_eligibility"]}
+{"case_id":"g06_stale_confirmation","user_id":"U001","messages":["O1002 商品坏了，帮我退款","查一下订单 O1001","确认"],"expected_statuses":["confirmation_required","executed","clarify"],"expected_agents":["order","refund"],"expected_tools":["get_order","get_refund_eligibility"]}
+{"case_id":"g07_cross_user","user_id":"U001","messages":["查询订单 O2001"],"expected_statuses":["escalated"],"expected_agents":["order"],"expected_tools":["get_order"]}
+{"case_id":"g08_order_inventory","user_id":"U001","messages":["查询订单 O1001 和库存 SKU-RED-42"],"expected_statuses":["executed"],"expected_agents":["order","inventory"],"expected_tools":["get_order","check_inventory"]}
+{"case_id":"g09_tracking_inventory","user_id":"U001","messages":["查 O1001 物流以及 SKU-BLUE-40 库存"],"expected_statuses":["executed"],"expected_agents":["order","inventory"],"expected_tools":["track_package","check_inventory"]}
+{"case_id":"g10_missing_order","user_id":"U001","messages":["帮我查订单"],"expected_statuses":["clarify"],"expected_agents":["order"],"expected_tools":[]}
+{"case_id":"g11_out_of_scope","user_id":"U001","messages":["给我讲个笑话"],"expected_statuses":["clarify"],"expected_agents":[],"expected_tools":[]}
+{"case_id":"g12_duplicate_confirmation","user_id":"U001","messages":["O1002 商品坏了，帮我退款","确认","确认"],"expected_statuses":["confirmation_required","executed","clarify"],"expected_agents":["order","refund"],"expected_tools":["get_order","get_refund_eligibility","create_refund"]}
