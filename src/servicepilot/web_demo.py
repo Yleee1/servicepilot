@@ -2,15 +2,18 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import threading
 from dataclasses import asdict
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from .baseline import RuleBasedToolCaller
 from .graph_session import GraphServiceSession
-from .llm_client import OpenAICompatibleJSONClient
+from .llm_client import OpenAICompatibleJSONClient, load_dotenv
 from .mlx_client import MLXJSONClient
 from .model_caller import ModelToolCaller
+from .observability import OptionalLangfuseSink
+from .trace_events import JsonlTraceSink
 
 PAGE = r"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -48,17 +51,27 @@ class DemoState:
         user_id: str = "U001",
         *,
         checkpoint_path: str | None = None,
+        trace_sinks=(),
     ) -> None:
         self.caller = caller
         self.checkpoint_path = checkpoint_path
+        self.trace_sinks = tuple(trace_sinks)
         self.lock = threading.Lock()
-        self.session = GraphServiceSession(user_id, caller, sqlite_path=checkpoint_path)
+        self.session = GraphServiceSession(
+            user_id,
+            caller,
+            sqlite_path=checkpoint_path,
+            trace_sinks=self.trace_sinks,
+        )
 
     def reset(self, user_id: str) -> dict:
         with self.lock:
             self.session.close()
             self.session = GraphServiceSession(
-                user_id, self.caller, sqlite_path=self.checkpoint_path
+                user_id,
+                self.caller,
+                sqlite_path=self.checkpoint_path,
+                trace_sinks=self.trace_sinks,
             )
             return self.snapshot()
 
@@ -72,8 +85,17 @@ class DemoState:
                 self.caller,
                 thread_id=thread_id,
                 sqlite_path=self.checkpoint_path,
+                trace_sinks=self.trace_sinks,
             )
             return self.snapshot()
+
+    def close(self) -> None:
+        with self.lock:
+            self.session.close()
+            for sink in self.trace_sinks:
+                flush = getattr(sink, "flush", None)
+                if flush is not None:
+                    flush()
 
     def message(self, text: str) -> dict:
         with self.lock:
@@ -142,6 +164,38 @@ def build_caller(args):
     return RuleBasedToolCaller()
 
 
+def build_trace_sinks(env_file: str):
+    """Build local tracing unconditionally and Langfuse tracing when configured."""
+    load_dotenv(env_file)
+    sinks = [JsonlTraceSink("logs/servicepilot_trace.jsonl")]
+    if not (
+        os.environ.get("LANGFUSE_PUBLIC_KEY")
+        and os.environ.get("LANGFUSE_SECRET_KEY")
+    ):
+        print("Langfuse trace sink: disabled (credentials not configured)", flush=True)
+        return tuple(sinks)
+
+    from langfuse import get_client
+
+    client = get_client()
+    try:
+        authenticated = client.auth_check()
+    # Observability is optional; third-party client failures must not stop the demo.
+    except Exception as exc:  # noqa: BLE001
+        print(
+            f"Langfuse trace sink: disabled (authentication check failed: {exc})",
+            flush=True,
+        )
+        return tuple(sinks)
+    if not authenticated:
+        print("Langfuse trace sink: disabled (authentication failed)", flush=True)
+        return tuple(sinks)
+
+    sinks.append(OptionalLangfuseSink(client, enabled=True))
+    print("Langfuse trace sink: enabled", flush=True)
+    return tuple(sinks)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run the ServicePilot local web demo")
     parser.add_argument("--caller", choices=("rule", "deepseek", "mlx"), default="rule")
@@ -155,11 +209,15 @@ def main() -> None:
         "--checkpoint-path", default="data/demo/servicepilot_checkpoints.sqlite"
     )
     args = parser.parse_args()
+    trace_sinks = build_trace_sinks(args.env_file)
+    state = DemoState(
+        build_caller(args),
+        checkpoint_path=args.checkpoint_path,
+        trace_sinks=trace_sinks,
+    )
     server = ThreadingHTTPServer(
         (args.host, args.port),
-        make_handler(
-            DemoState(build_caller(args), checkpoint_path=args.checkpoint_path)
-        ),
+        make_handler(state),
     )
     print(f"ServicePilot demo: http://{args.host}:{args.port}", flush=True)
     try:
@@ -167,6 +225,7 @@ def main() -> None:
     except KeyboardInterrupt:
         pass
     finally:
+        state.close()
         server.server_close()
 
 
